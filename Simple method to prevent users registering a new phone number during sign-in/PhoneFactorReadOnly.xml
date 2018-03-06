@@ -1,4 +1,4 @@
-    <ClaimsProvider>
+<ClaimsProvider>
       <DisplayName>PhoneFactor</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="PhoneFactor-InputOrVerify">
@@ -6,6 +6,7 @@
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.PhoneFactorProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
           <Metadata>
             <Item Key="ContentDefinitionReferenceId">api.phonefactor</Item>
+            <!-- True, will allow users to register phone numbers, and false, will disable this capability -->
             <Item Key="ManualPhoneNumberEntryAllowed">false</Item>
           </Metadata>
           <CryptographicKeys>
