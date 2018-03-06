@@ -1,0 +1,30 @@
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" PolicyId="B2C_1A_signup_signinWithAADMFA" PublicPolicyUri="http://YourB2CTenantName.onmicrosoft.com/B2C_1A_signup_signin" TenantObjectId="YourTenantID" DeploymentMode="Development" UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+  <BasePolicy>
+    <TenantId>YourB2CTenantName.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_YourTrustFrameworkExtensionsPolicy</PolicyId>
+  </BasePolicy>
+  <RelyingParty>
+	<!-- The default user journey must be present in the extensions or base policy -->
+    <DefaultUserJourney ReferenceId="YourDefaultUserJourney" />
+    <UserJourneyBehaviors>
+	  <!-- Edit or remove the Application Insights settings below -->
+      <JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="YourInstrumentationKey" DeveloperMode="true" ClientEnabled="false" ServerEnabled="true" TelemetryVersion="1.0.0" />
+    </UserJourneyBehaviors>
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+		<!-- Edit the claims you would like to output, as needed -->
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" />
+        <OutputClaim ClaimTypeReferenceId="identityProvider" />
+		<!-- This claim contains the registered phone number during sign-up -->
+		<OutputClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" />		
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
