@@ -1,0 +1,52 @@
+    <ClaimsProvider>
+	  <!-- Add your own domain_hint -->
+      <Domain>YourDomain</Domain>
+	  <!-- Add your own display name -->
+      <DisplayName>Login using YourDomain</DisplayName>
+      <TechnicalProfiles>
+	    <!-- The technical profile must match the technical profile you are invoking from the relying party policy -->
+        <TechnicalProfile Id="YourTechnicalProfile">
+		  <!-- The display name showed in the identity provider button/link in the relying party policy -->
+          <DisplayName>YourDisplayName</DisplayName>
+          <Description>Login with your YourDomain account</Description>
+          <Protocol Name="OpenIdConnect" />
+          <OutputTokenFormat>JWT</OutputTokenFormat>
+          <Metadata>
+            <Item Key="METADATA">
+			<!-- Replace with the URL of your AAD tenant -->
+			https://login.windows.net/mdiiorio.onmicrosoft.com/.well-known/openid-configuration</Item>
+            <Item Key="ProviderName">
+			<!-- Replace with your tenant ID -->
+			https://sts.windows.net/YourTenantId/</Item>
+			<!-- Replace with your tenantId -->
+            <Item Key="client_id">13212ab1-fdef-454e-a799-ad72ddb8711f</Item>
+			<!-- Replace with the ID of the element in scope (Tenant, Application, or Policy -->
+            <Item Key="IdTokenAudience">YourId</Item>
+            <Item Key="response_types">id_token</Item>
+            <Item Key="UsePolicyInRedirectUri">false</Item>
+          </Metadata>
+          <CryptographicKeys>
+		    <!-- Replace with your own secret -->
+            <Key Id="client_secret" StorageReferenceId="B2C_1A_YourSecret" />
+          </CryptographicKeys>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="socialIdpUserId" PartnerClaimType="oid" />
+            <OutputClaim ClaimTypeReferenceId="tenantId" PartnerClaimType="tid" />
+            <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name" />
+            <OutputClaim ClaimTypeReferenceId="surName" PartnerClaimType="family_name" />
+            <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+			<!-- Replace with a value of your preference -->
+            <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="MyAADAuthentication" />
+			<!-- Replace with a value of your preference -->
+            <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="MyAzureAD" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
+            <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
+            <OutputClaimsTransformation ReferenceId="CreateAlternativeSecurityId" />
+            <OutputClaimsTransformation ReferenceId="CreateSubjectClaimFromAlternativeSecurityId" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
