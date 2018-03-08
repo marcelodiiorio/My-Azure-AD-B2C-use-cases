@@ -1,10 +1,9 @@
-<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="YourTenantName.onmicrosoft.com" TenantObjectId="YourTenantId" PolicyId="B2C_1A_SignInSaml" PublicPolicyUri="http://YourTenantName.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions" DeploymentMode="Production" >
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc" PolicyId="B2C_1A_SignInSaml" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions" DeploymentMode="Development" UserJourneyRecorderEndpoint="https://b2crecorder.azurewebsites.net/stream?id=c89ab53e-e76d-47e7-809f-8e776bca80f1">
   <BasePolicy>
-    <TenantId>YourTenantName.onmicrosoft.com</TenantId>
+    <TenantId>mdiioriob2c.onmicrosoft.com</TenantId>
     <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
   </BasePolicy>
   <RelyingParty>
-	<!-- Add your own DefaultUserJourney -->
     <DefaultUserJourney ReferenceId="SignInSaml" />
     <TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
@@ -12,8 +11,7 @@
       <!--<OutputTokenFormat>SAML11</OutputTokenFormat>-->
       <Metadata>
         <Item Key="PartnerEntity">
-		<!-- add your STS metadata URL. If your STS don't have a metadata URL, then you need to configure the below CDATA manually. -->
-        https://YourADFSFarm/federationmetadata/2007-06/federationmetadata.xml
+        https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml
 		
           <!--<![CDATA[
 					<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="urn:itfoxtec:identity:saml2:testwebapp" validUntil="2026-12-27T23:42:22.079Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
@@ -39,11 +37,11 @@
         <Item Key="client_id">customClientId</Item>
       </Metadata>
       <OutputClaims>
-	  <!-- Customize the list of claims to output. In the example we are using userPrincipalName as SubjectNamingInfo. Use any other claim based on your needs. -->
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
         <OutputClaim ClaimTypeReferenceId="surname" />
-        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />
+        <!--<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />-->
+        <OutputClaim ClaimTypeReferenceId="objectId" />
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
       </OutputClaims>
