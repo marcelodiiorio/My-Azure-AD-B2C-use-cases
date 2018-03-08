@@ -2,7 +2,7 @@
 
 What you need for this scenario:
 
-	- An ADFS farm with accessible metadata from internet, and access to https://<YourFarm>/adfs/ls/idpinitiatedsignon.aspx, or a sample federated web application. I'm personally using the sample application described here https://blogs.technet.microsoft.com/tangent_thoughts/2015/02/20/install-and-configure-a-simple-net-4-5-sample-federated-application-samapp/. It's a simple application that shows you the content of the issued token after being authenticated.
+	- An ADFS farm with accessible metadata from internet, and access to https://<YourFarm>/adfs/ls/idpinitiatedsignon.aspx, or a sample federated web application.
 		- Add your B2C tenant as Claims Provider Trust in ADFS.
 			- You can create it using the B2C metadata URL available for this purpose https://login.microsoftonline.com/te/<YourB2CTenant.onmicrosoft.com/b2c_1A_<YourB2CRPPolicyName>/samlp/metadata
 		- Create a custom claims rule like this one:

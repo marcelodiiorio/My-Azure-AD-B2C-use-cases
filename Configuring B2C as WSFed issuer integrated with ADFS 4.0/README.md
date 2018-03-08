@@ -20,7 +20,6 @@ How to test:
 Access to https://<YourADFSFarm>/adfs/ls/idpInitiatedSignOn.aspx, or the url of your internal application published through Web Application Proxy. Select your B2C tenant for signing-in, and enter credentials of a B2C tenant user. If you get an error, you can troubleshoot by checking the ADFS log, or use Application Insights (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-troubleshoot-custom).
 
 Remember that if you do any change on the B2C side that may change the information provided through the metadata URL, you must trigger an update of the claims provider trust in ADFS, if you are using metadata to pull the different parameters from B2C.
-<<<<<<< HEAD
 
 Note: If you want to have both SAML and WS-Fed in the same claims provider trust, you need to configure it manually, because the metadata URLs from B2C will configure it with the SAML or WS-Fed respectively, and not both. Endpoints are:
 
@@ -35,8 +34,3 @@ You must also add an additional protocol name entry in the claims schema AT LEAS
           <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userprincipalname" />
 		  <Protocol Name="WsFed" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
         </DefaultPartnerClaimTypes>
-		
-
-	
-=======
->>>>>>> 40d9006f6162004c0cb8806c0c6590fa5a6b97dd
