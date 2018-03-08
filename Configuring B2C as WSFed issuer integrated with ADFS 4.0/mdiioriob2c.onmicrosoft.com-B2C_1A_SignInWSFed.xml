@@ -1,0 +1,53 @@
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="YourTenantName.onmicrosoft.com" TenantObjectId="YourTenantId" PolicyId="B2C_1A_SignInSaml" PublicPolicyUri="http://YourTenantName.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions" DeploymentMode="Production" >
+  <BasePolicy>
+    <TenantId>YourTenantName.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+  <RelyingParty>
+	<!-- Add your own DefaultUserJourney -->
+    <DefaultUserJourney ReferenceId="SignInWsFed" />
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="WsFed" />
+      <!-- <OutputTokenFormat>SAML11</OutputTokenFormat> -->
+      <Metadata>
+        <Item Key="PartnerEntity">
+		<!-- add your STS metadata URL. If your STS don't have a metadata URL, then you need to configure the below CDATA manually. -->
+        https://YourADFSFarm/federationmetadata/2007-06/federationmetadata.xml
+		
+          <!--<![CDATA[
+					<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="urn:itfoxtec:identity:saml2:testwebapp" validUntil="2026-12-27T23:42:22.079Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+					<md:SPSSODescriptor WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+					<md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+					<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost/Auth/AssertionConsumerService" index="0" isDefault="true"/> </md:SPSSODescriptor> </md:EntityDescriptor>
+				]]>--></Item>
+        <!-- Demo: SAML 2 attribute cncoding info -->
+        <Item Key="Saml2AttributeEncodingInfo"><![CDATA[ 
+			<saml2:AttributeStatement xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
+				<saml2:Attribute FriendlyName="userPrincipalName" Name="UserId" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+					<saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string"></saml2:AttributeValue>
+				</saml2:Attribute>
+			</saml2:AttributeStatement> 
+			]]></Item>
+        <!-- Demo: SAML 1.1 attribute cncoding info -->
+        <Item Key="Saml11AttributeEncodingInfo"><![CDATA[ 
+			<saml:AttributeStatement xmlns:saml="urn:oasis:names:tc:SAML:1.0:assertion">
+				<saml:Attribute AttributeName="ImmutableID" AttributeNamespace="http://schemas.microsoft.com/LiveID/Federation/2008/05">
+					<saml:AttributeValue></saml:AttributeValue></saml:Attribute><saml:Attribute AttributeName="UPN" AttributeNamespace="http://schemas.xmlsoap.org/claims">
+					<saml:AttributeValue></saml:AttributeValue></saml:Attribute></saml:AttributeStatement> 
+          ]]></Item>
+        <Item Key="client_id">customClientId</Item>
+      </Metadata>
+      <OutputClaims>
+	  <!-- Customize the list of claims to output. In the example we are using userPrincipalName as SubjectNamingInfo. Use any other claim based on your needs. -->
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="userPrincipalName" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>

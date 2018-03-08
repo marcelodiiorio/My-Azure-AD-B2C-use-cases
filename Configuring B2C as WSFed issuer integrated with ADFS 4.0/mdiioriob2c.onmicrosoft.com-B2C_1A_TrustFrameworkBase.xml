@@ -1,0 +1,22 @@
+
+      <TechnicalProfiles>
+        <TechnicalProfile Id="WsFedIssuer">
+          <DisplayName>Token Issuer</DisplayName>
+          <Protocol Name="None" />
+          <OutputTokenFormat>SAML11</OutputTokenFormat>
+          <Metadata>
+            <Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInWSFed</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
+            <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
+          </CryptographicKeys>
+          <InputClaims />
+          <OutputClaims />
+          <!-- <UseTechnicalProfileForSessionManagement ReferenceId="SM-WsFed" />-->
+        </TechnicalProfile>
+        <TechnicalProfile Id="SM-WsFed">
+          <DisplayName>Session Management Provider</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.WsFedSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
