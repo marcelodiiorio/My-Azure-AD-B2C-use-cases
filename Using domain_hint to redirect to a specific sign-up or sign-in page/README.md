@@ -9,5 +9,3 @@ for this example, you will need:
 The XML policy file only contains the claims provider that must be added to your policy. In general, claims providers are contained in the extensions or base policy. As you may know, you may even have everything in a single policy.
 
 This claims provider must be called from the orchestration step related to the IdP selection. From the relying party policy, you must call a DefaultUserJourney that contains all this and additional orchestration steps, and from the orchestration step, you must call the corresponding claims provider.
-	
-	

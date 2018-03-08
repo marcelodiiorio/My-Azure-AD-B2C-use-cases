@@ -1,4 +1,4 @@
-This scenario allows you to use Azure AD B2C as SAML tokens issuer.
+ This scenario allows you to use Azure AD B2C as SAML tokens issuer.
 
 What you need for this scenario:
 
