@@ -1,4 +1,4 @@
-The PhoneFactor claim provider can be modified to prevent users entering a new phone number during different actions that may trigger MFA. This is done by setting the property "ManualPhoneNumberEntryAllowed" from true to false.
+The PhoneFactor claims provider can be modified to prevent users entering a new phone number during different actions that may trigger MFA. This is done by setting the property "ManualPhoneNumberEntryAllowed" from true to false.
 
 Take into account if you require MFA to an account that doesn't have a phone number registered (verified.StrongAuthenticationPhoneNumber, or Phone in "Authentication contact info" (Users and groups blade)) then B2C will throw you an error saying that there is no phone registered for MFA, and manual registration is disabled.
 
