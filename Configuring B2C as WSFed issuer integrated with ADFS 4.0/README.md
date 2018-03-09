@@ -32,5 +32,5 @@ You must also add an additional protocol name entry in the claims schema AT LEAS
           <Protocol Name="OAuth2" PartnerClaimType="upn" />
           <Protocol Name="OpenIdConnect" PartnerClaimType="upn" />
           <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userprincipalname" />
-	  <Protocol Name="WsFed" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
+	     <Protocol Name="WsFed" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
         </DefaultPartnerClaimTypes>
