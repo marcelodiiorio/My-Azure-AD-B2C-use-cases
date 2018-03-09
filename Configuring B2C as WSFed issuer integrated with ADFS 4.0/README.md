@@ -21,7 +21,7 @@ Access to https://<YourADFSFarm>/adfs/ls/idpInitiatedSignOn.aspx, or the url of 
 
 Remember that if you do any change on the B2C side that may change the information provided through the metadata URL, you must trigger an update of the claims provider trust in ADFS, if you are using metadata to pull the different parameters from B2C.
 
-Note: If you want to have both SAML and WS-Fed in the same claims provider trust, you need to configure it manually, because the metadata URLs from B2C will configure it with the SAML or WS-Fed respectively, and not both. Endpoints are:
+Note: If you want to have both SAML and WS-Fed in the same claims provider trust, you need to configure it manually, because the metadata URLs from B2C will configure it with the SAML or WS-Fed respectively, and not both. Metadata URLs are:
 
 	- SAML: https://login.microsoftonline.com/te/<YourB2CTenant>.onmicrosoft.com/b2c_1A_<YourSAMLRPolicy>/samlp/metadata
 	- WS-Fed: https://login.microsoftonline.com/te/<YourB2CTenant>.onmicrosoft.com/b2c_1A_<YourRPWsFedPolicy>/wsfed/metadata
