@@ -19,5 +19,3 @@ Original Claim type:
       </ClaimType>
 	  
 The modified regular expression doesn't allow accounts with the domain "hacker.com". The claim definition is in the base policy. claims schema section.
-
-I'm in the process of creating an alternate version of this use case, where we use Azure Functions to validate the email entered during sign-up, and before sending the verification code.
