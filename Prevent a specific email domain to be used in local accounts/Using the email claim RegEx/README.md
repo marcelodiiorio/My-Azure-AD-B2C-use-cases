@@ -18,4 +18,4 @@ Original Claim type:
         </Restriction>
       </ClaimType>
 	  
-The modified regular expression doesn't allow accounts with the domain "hacker.com". The claim definition is in the base policy. claims schema section.
+The modified regular expression doesn't allow accounts with the domain "hacker.com". The claim definition is in the base policy, claims schema section.
