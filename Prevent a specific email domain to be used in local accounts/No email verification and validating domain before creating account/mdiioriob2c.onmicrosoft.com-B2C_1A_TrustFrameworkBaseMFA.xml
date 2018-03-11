@@ -539,7 +539,7 @@
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.PhoneFactorProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
           <Metadata>
             <Item Key="ContentDefinitionReferenceId">api.phonefactor</Item>
-            <Item Key="ManualPhoneNumberEntryAllowed">false</Item>
+            <Item Key="ManualPhoneNumberEntryAllowed">true</Item>
           </Metadata>
           <CryptographicKeys>
             <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
