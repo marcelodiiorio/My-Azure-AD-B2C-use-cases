@@ -28,9 +28,11 @@ Note: If you want to have both SAML and WS-Fed in the same claims provider trust
 	
 You must also add an additional protocol name entry in the claims schema AT LEAST for each claim you are outputting in the relying party policy. See the example below.
 
+```xml
         <DefaultPartnerClaimTypes>
           <Protocol Name="OAuth2" PartnerClaimType="upn" />
           <Protocol Name="OpenIdConnect" PartnerClaimType="upn" />
           <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userprincipalname" />
 	      <Protocol Name="WsFed" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
         </DefaultPartnerClaimTypes>
+```
