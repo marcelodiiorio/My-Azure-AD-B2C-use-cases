@@ -3,7 +3,7 @@
 In this case, we use the existing RegEx in the email claim to modify it in a way it denies using certain domains in local accounts.
 
 Original Claim type:
-
+```xml
 	  <ClaimType Id="email">
         <DisplayName>Email Address</DisplayName>
         <DataType>string</DataType>
@@ -17,5 +17,5 @@ Original Claim type:
           <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address." />
         </Restriction>
       </ClaimType>
-	  
+```	
 The modified regular expression doesn't allow accounts with the domain "hacker.com". The claim definition is in the base policy, claims schema section.
