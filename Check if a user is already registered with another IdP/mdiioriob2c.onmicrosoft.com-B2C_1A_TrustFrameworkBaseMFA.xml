@@ -182,7 +182,7 @@
         <DisplayName>UserId for MFA</DisplayName>
         <DataType>string</DataType>
       </ClaimType>
-      <!--<ClaimType Id="email">
+      <ClaimType Id="email">
         <DisplayName>Email Address</DisplayName>
         <DataType>string</DataType>
         <DefaultPartnerClaimTypes>
@@ -191,23 +191,9 @@
         <UserHelpText>Email address that can be used to contact you.</UserHelpText>
         <UserInputType>TextBox</UserInputType>
         <Restriction>
-          <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address." />
-        </Restriction>
-      </ClaimType>-->
-	  
-	  <ClaimType Id="email">
-        <DisplayName>Email Address</DisplayName>
-        <DataType>string</DataType>
-        <DefaultPartnerClaimTypes>
-          <Protocol Name="OpenIdConnect" PartnerClaimType="email" />
-        </DefaultPartnerClaimTypes>
-        <UserHelpText>Email address that can be used to contact you.</UserHelpText>
-        <UserInputType>TextBox</UserInputType>
-        <Restriction>
-          <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@(?!hacker\.com$)[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address. The address entered is invalid, or belongs to a forbidden domain" />
+          <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@(?!.*\hacker.com$)[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address. The address entered is invalid, or belongs to a forbidden domain" />
         </Restriction>
       </ClaimType>
-	  
       <ClaimType Id="otherMails">
         <DisplayName>Alternate Email Addresses</DisplayName>
         <DataType>stringCollection</DataType>
@@ -673,7 +659,8 @@
             <!-- Optional claims. -->
             <PersistedClaim ClaimTypeReferenceId="givenName" />
             <PersistedClaim ClaimTypeReferenceId="surname" />
-            <!--<PersistedClaim ClaimTypeReferenceId="verified.strongAuthenticationPhoneNumber" />-->
+            
+			<!--<PersistedClaim ClaimTypeReferenceId="verified.strongAuthenticationPhoneNumber" />-->
           </PersistedClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectId" />
@@ -728,7 +715,8 @@
         <TechnicalProfile Id="AAD-UserWriteProfileUsingObjectId">
           <Metadata>
             <Item Key="Operation">Write</Item>
-            <Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+            <!--<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>-->
+			<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
             <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
           </Metadata>
           <IncludeInSso>false</IncludeInSso>
@@ -880,7 +868,6 @@
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectId" />
             <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="Verified.Email" Required="true" />
-			<!-- <OutputClaim ClaimTypeReferenceId="email" Required="true" /> -->
             <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
             <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
             <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
@@ -892,7 +879,6 @@
             <OutputClaim ClaimTypeReferenceId="surName" />
           </OutputClaims>
           <ValidationTechnicalProfiles>
-		    <!--<ValidationTechnicalProfile ReferenceId="AzureFunctions-CheckEmailDomainWebHook" />-->
 			<ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
 		  </ValidationTechnicalProfiles>
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
