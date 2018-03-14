@@ -6,7 +6,7 @@ This is useful in cases where manual registration of phone numbers is a requirem
 
 The PhoneFactor claim provider can be found in the policies that are part of the B2C custom policies starter pack, inside those that are related to MFA.
 
-If you prevent users from entering a new phone number and they don't have one registered, then they will be an error like this one:
+If you prevent users from entering a new phone number and they don't have one registered, then they will get an error like this one:
 
 https://jwt.io/#error=server_error&error_description=AADB2C90145%3a+No+unverified+phone+numbers+have+been+found+and+policy+does+not+allow+a+user+entered+number.%0d%0aCorrelation+ID%3a+c0b9a58e-4104-425a-a437-9fc3fa34cf57%0d%0aTimestamp%3a+2018-03-14+09%3a26%3a17Z%0d%0a
 
