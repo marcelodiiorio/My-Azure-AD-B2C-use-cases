@@ -13,7 +13,7 @@
             		<DisplayName>Check SignInName domain Azure Function</DisplayName>
             		<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
             		<Metadata>
-			<!-- Replace the ServiceUrl with your own URL, taken from the Azure Function -->
+				<!-- Replace the ServiceUrl with your own URL, taken from the Azure Function -->
                 		<Item Key="ServiceUrl">https://b2c-redirectuserdomainhint.azurewebsites.net/api/HttpTriggerCSharp1?code=lJsnC9OqWCbDQ0ng8ziCyFOVJSxvG3zzww2A3L0YqDZSAIy//Ofi6g==</Item>
                 		<Item Key="AuthenticationType">None</Item>
                 		<Item Key="SendClaimsIn">Body</Item>
