@@ -14,5 +14,6 @@ If for some reason there is a match, then a message is displayed to the user, su
 	- If it's sign-up and the account doesn't exists, then it's created following the normal steps.
 	
 For this use case, we use:
+
 	- A REST API claims provider with two technical profiles, depending on the cases explained above.
 	- A base, extensions and relying party policy. The REST API claims provider is in the extensions policy.
