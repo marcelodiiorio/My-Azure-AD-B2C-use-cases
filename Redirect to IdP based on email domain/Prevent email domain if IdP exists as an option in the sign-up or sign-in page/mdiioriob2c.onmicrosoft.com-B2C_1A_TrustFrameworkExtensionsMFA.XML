@@ -10,26 +10,52 @@
   <ClaimsProvider>
     <DisplayName>REST APIs</DisplayName>
     <TechnicalProfiles>
-        <TechnicalProfile Id="AzureFunctions-RedirectUsingEmailDomainWebHook">
-            <DisplayName>Check email domain Azure Function</DisplayName>
+        <TechnicalProfile Id="AzureFunctions-CheckDomainEmailWebHook-SignInName">
+            <DisplayName>Check SignInName domain Azure Function</DisplayName>
             <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
             <Metadata>
-                <Item Key="ServiceUrl">https://b2c-redirectuserdomainhint.azurewebsites.net/api/HttpTriggerCSharp1?code=7c14kKnSYv6Cnsgo5NJVwkMXVjqTVTxAlmY7jGbcZaalhjMJArTYuQ==</Item>
+				<!-- Replace the ServiceUrl with your own URL, taken from the Azure Function -->
+                <Item Key="ServiceUrl">https://b2c-redirectuserdomainhint.azurewebsites.net/api/HttpTriggerCSharp1?code=lJsnC9OqWCbDQ0ng8ziCyFOVJSxvG3zzww2A3L0YqDZSAIy//Ofi6g==</Item>
                 <Item Key="AuthenticationType">None</Item>
                 <Item Key="SendClaimsIn">Body</Item>
             </Metadata>
             <InputClaims>
-                <InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="VerifiedEmail" />
+				<!-- We use the signInName claim in case of the SelfAsserted-LocalAccountSignIn-Email technical profile -->
+                <InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="VerifiedSignInName" />
             </InputClaims>
             <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
         </TechnicalProfile>
+		<!-- The SelfAsserted-LocalAccountSignIn-Email is used for local accounts sign-in -->
         <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
             <ValidationTechnicalProfiles>
-                <ValidationTechnicalProfile ReferenceId="AzureFunctions-RedirectUsingEmailDomainWebHook" />
+                <ValidationTechnicalProfile ReferenceId="AzureFunctions-CheckDomainEmailWebHook-SignInName" />
             </ValidationTechnicalProfiles>
         </TechnicalProfile>
-    </TechnicalProfiles>
-</ClaimsProvider>
+	
+        <TechnicalProfile Id="AzureFunctions-CheckDomainEmailWebHook-Email">
+            <DisplayName>Check email domain Azure Function</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <Metadata>
+				<!-- Replace the ServiceUrl with your own URL, taken from the Azure Function -->
+                <Item Key="ServiceUrl">https://b2c-redirectuserdomainhint.azurewebsites.net/api/HttpTriggerCSharp1?code=lJsnC9OqWCbDQ0ng8ziCyFOVJSxvG3zzww2A3L0YqDZSAIy//Ofi6g==</Item>
+                <Item Key="AuthenticationType">None</Item>
+                <Item Key="SendClaimsIn">Body</Item>
+            </Metadata>
+            <InputClaims>
+				<!-- We use the signInName claim in case of the SelfAsserted-LocalAccountSignIn-Email technical profile -->
+                <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="VerifiedEmail" />
+            </InputClaims>
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+		<!-- The SelfAsserted-LocalAccountSignIn-Email is used for local accounts sign-in -->
+        <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+            <ValidationTechnicalProfiles>
+                <ValidationTechnicalProfile ReferenceId="AzureFunctions-CheckDomainEmailWebHook-Email" />
+            </ValidationTechnicalProfiles>
+        </TechnicalProfile>
+	
+     </TechnicalProfiles>
+    </ClaimsProvider>
   
     <ClaimsProvider>
       <DisplayName>Facebook</DisplayName>
