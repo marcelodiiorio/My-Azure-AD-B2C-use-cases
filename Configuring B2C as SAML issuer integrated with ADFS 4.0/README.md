@@ -17,7 +17,7 @@ It is suggested to use the B2C starter pack, available here https://docs.microso
 
 How to test:
 
-Access to https://<YourADFSFarm>/adfs/ls/idpInitiatedSignOn.aspx, or the url of your internal application published through Web Application Proxy. Select your B2C tenant for signing-in, and enter credentials of a B2C tenant user. If you get an error, you can troubleshoot by checking the ADFS log, or use Application Insights (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-troubleshoot-custom).
+Access to https://YourADFSFarm/adfs/ls/idpInitiatedSignOn.aspx, or the url of your internal application published through Web Application Proxy. Select your B2C tenant for signing-in, and enter credentials of a B2C tenant user. If you get an error, you can troubleshoot by checking the ADFS log, or use Application Insights (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-troubleshoot-custom).
 
 Remember that if you do any change on the B2C side that may change the information provided through the metadata URL, you must trigger an update of the claims provider trust in ADFS, if you are using metadata to pull the different parameters from B2C.
 	
