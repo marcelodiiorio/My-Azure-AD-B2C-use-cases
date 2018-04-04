@@ -34,7 +34,7 @@ public static async Task<object> Run(HttpRequestMessage request, TraceWriter log
             }
         else
             {
-                request.CreateResponse(HttpStatusCode.OK); 
+                return request.CreateResponse(HttpStatusCode.OK); 
                 //response.Headers.Location = new Uri("http://www.google.com");
                 //return response;              
             }
