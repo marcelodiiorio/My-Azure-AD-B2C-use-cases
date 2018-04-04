@@ -3,18 +3,18 @@
     <ClaimsSchema>
       <!-- The ClaimsSchema is divided into three sections:
            1. Section I lists the minimum claims that are required for the user journeys to work properly.
-           2. Section II lists the claims required for query string parameters and other special parameters 
-              to be passed to other claims providers, esp. login.microsoftonline.com for authentication. 
+           2. Section II lists the claims required for query string parameters and other special parameters
+              to be passed to other claims providers, esp. login.microsoftonline.com for authentication.
               Please do not modify these claims.
-           3. Section III lists any additional (optional) claims that can be collected from the user, stored 
-              in the directory and sent in tokens during sign in. Add new claims to be collected from the user 
+           3. Section III lists any additional (optional) claims that can be collected from the user, stored
+              in the directory and sent in tokens during sign in. Add new claims to be collected from the user
               and/or sent in the token in Section III. -->
-      <!-- NOTE: The claims schema contains restrictions on certain claims such as passwords and usernames. 
-           The trust framework policy treats Azure AD as any other claims provider and all its restrictions 
-           are modelled in the policy. A policy could be modified to add more restrictions, or use another 
+      <!-- NOTE: The claims schema contains restrictions on certain claims such as passwords and usernames.
+           The trust framework policy treats Azure AD as any other claims provider and all its restrictions
+           are modelled in the policy. A policy could be modified to add more restrictions, or use another
            claims provider for credential storage which will have its own restrictions. -->
       <!-- SECTION I: Claims required for user journeys to work properly -->
-	  
+
       <ClaimType Id="socialIdpUserId">
         <DisplayName>Username</DisplayName>
         <DataType>string</DataType>
@@ -69,8 +69,8 @@
         <UserHelpText>Enter password</UserHelpText>
         <UserInputType>Password</UserInputType>
       </ClaimType>
-      <!-- The claim types newPassword and reenterPassword are considered special, please do not change the names. 
-           The UI validates the the user correctly re-entered their password during account creation based on these 
+      <!-- The claim types newPassword and reenterPassword are considered special, please do not change the names.
+           The UI validates the the user correctly re-entered their password during account creation based on these
            claim types.	  -->
       <ClaimType Id="newPassword">
         <DisplayName>New Password</DisplayName>
@@ -195,7 +195,7 @@
           <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address." />
         </Restriction>
       </ClaimType>-->
-	  
+
 	  <ClaimType Id="email">
         <DisplayName>Email Address</DisplayName>
         <DataType>string</DataType>
@@ -208,7 +208,7 @@
           <Pattern RegularExpression="^[a-zA-Z0-9.!#$%&amp;'^_`{}~-]+@(?!hacker\.com$)[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address. The address entered is invalid, or belongs to a forbidden domain" />
         </Restriction>
       </ClaimType>
-	  
+
       <ClaimType Id="otherMails">
         <DisplayName>Alternate Email Addresses</DisplayName>
         <DataType>stringCollection</DataType>
@@ -436,43 +436,19 @@
     </ContentDefinitions>
   </BuildingBlocks>
   <!--
-        A list of all the claim providers that can be used in the technical policies. If a claims provider is not listed 
+        A list of all the claim providers that can be used in the technical policies. If a claims provider is not listed
         in this section, then it cannot be used in a technical policy.
     -->
   <ClaimsProviders>
-  
-  <ClaimsProvider>
-    <DisplayName>REST APIs</DisplayName>
-    <TechnicalProfiles>
-        <TechnicalProfile Id="AzureFunctions-CheckEmailDomainWebHook">
-            <DisplayName>Check email domain Azure Function</DisplayName>
-            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-            <Metadata>
-                <Item Key="ServiceUrl">https://b2c-checkemaildomain.azurewebsites.net/api/HttpTriggerCSharp1?code=jA2Oe1n5zypfIW8uyUfUJZkw0nvpGERAiLK6M0Pp3oJaMByoe5lVww==</Item>
-                <Item Key="AuthenticationType">None</Item>
-                <Item Key="SendClaimsIn">Body</Item>
-            </Metadata>
-            <InputClaims>
-                <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="VerifiedEmail" />
-            </InputClaims>
-            <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-       <!-- <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
-            <ValidationTechnicalProfiles>
-                <ValidationTechnicalProfile ReferenceId="AzureFunctions-CheckEmailDomainWebHook" />
-            </ValidationTechnicalProfiles>
-        </TechnicalProfile>-->
-    </TechnicalProfiles>
-</ClaimsProvider>  
-  
+
     <ClaimsProvider>
-      <!-- The following Domain element allows this profile to be used if the request comes with domain_hint 
+      <!-- The following Domain element allows this profile to be used if the request comes with domain_hint
            query string parameter, e.g. domain_hint=facebook.com  -->
       <Domain>facebook.com</Domain>
       <DisplayName>Facebook</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="Facebook-OAUTH">
-          <!-- The text in the following DisplayName element is shown to the user on the claims provider 
+          <!-- The text in the following DisplayName element is shown to the user on the claims provider
                selection screen. -->
           <DisplayName>Facebook</DisplayName>
           <Protocol Name="OAuth2" />
@@ -626,6 +602,41 @@
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
         </TechnicalProfile>
+		
+		<!-- TEST -->
+		<!-- Technical profile to search if a local user is trying to sign-up using an email already associated to a social account -->
+        <TechnicalProfile Id="AAD-UserReadUsingOtherMails">
+          <Metadata>
+            <Item Key="Operation">Read</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">true</Item>
+            <Item Key="UserMessageIfClaimsPrincipalAlreadyExists">The email address is already associated to another account registered with a social identity provider. Sign-in using the social identity provider, or sign-up using another email account.</Item>
+            <!--<Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+            <Item Key="UserMessageIfClaimsPrincipalDoesNotExist">test.</Item>-->
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CreateOtherMailsFromEmail" />
+          </InputClaimsTransformations>
+          <InputClaims>
+			<InputClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames.emailAddress" Required="true" />
+			<InputClaim ClaimTypeReferenceId="otherMails" PartnerClaimType="otherMails" />
+          </InputClaims>
+          <PersistedClaims>
+            <!-- Required claims -->
+            <!-- Optional claims -->
+          </PersistedClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="otherMails" PartnerClaimType="otherMails" />
+            <!--<OutputClaim ClaimTypeReferenceId="newUser" PartnerClaimType="newClaimsPrincipalCreated" />-->
+            <!-- The following other mails claim is needed for the case when a user is created, we get otherMails from directory. Self-asserted provider also has an
+                 OutputClaims, and if this is absent, Self-Asserted provider will prompt the user for otherMails. -->
+          </OutputClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+		
+		<!-- END TEST -->
+		
         <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId">
           <Metadata>
             <Item Key="Operation">Read</Item>
@@ -647,13 +658,15 @@
           </OutputClaims>
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
         </TechnicalProfile>
+
         <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId-NoError">
           <Metadata>
             <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
           </Metadata>
           <IncludeTechnicalProfile ReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
         </TechnicalProfile>
-        <!-- Technical profiles for local accounts -->
+		
+		<!-- Technical profiles for local accounts -->
         <TechnicalProfile Id="AAD-UserWriteUsingLogonEmail">
           <Metadata>
             <Item Key="Operation">Write</Item>
@@ -694,6 +707,7 @@
           <IncludeInSso>false</IncludeInSso>
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames" Required="true" />
+			<!-- <InputClaim ClaimTypeReferenceId="otherMails" PartnerClaimType="signInNames.emailAddress" Required="true" /> -->
           </InputClaims>
           <OutputClaims>
             <!-- Required claims -->
@@ -707,6 +721,7 @@
           </OutputClaims>
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
         </TechnicalProfile>
+		
         <TechnicalProfile Id="AAD-UserWritePasswordUsingObjectId">
           <Metadata>
             <Item Key="Operation">Write</Item>
@@ -801,7 +816,7 @@
             <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
           </CryptographicKeys>
           <InputClaims>
-            <!-- These claims ensure that any values retrieved in the previous steps (e.g. from an external IDP) are prefilled. 
+            <!-- These claims ensure that any values retrieved in the previous steps (e.g. from an external IDP) are prefilled.
                  Note that some of these claims may not have any value, for example, if the external IDP did not provide any of
                  these values, or if the claim did not appear in the OutputClaims section of the IDP.
                  In addition, if a claim is not in the InputClaims section, but it is in the OutputClaims section, then its
@@ -812,13 +827,13 @@
           </InputClaims>
           <OutputClaims>
             <!-- These claims are not shown to the user because their value is obtained through the "ValidationTechnicalProfiles"
-                 referenced below, or a default value is assigned to the claim. A claim is only shown to the user to provide a 
+                 referenced below, or a default value is assigned to the claim. A claim is only shown to the user to provide a
                  value if its value cannot be obtained through any other means. -->
             <OutputClaim ClaimTypeReferenceId="objectId" />
             <OutputClaim ClaimTypeReferenceId="newUser" />
             <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
-            <!-- Optional claims. These claims are collected from the user and can be modified. If a claim is to be persisted in the directory after having been 
-                 collected from the user, it needs to be added as a PersistedClaim in the ValidationTechnicalProfile referenced below, i.e. 
+            <!-- Optional claims. These claims are collected from the user and can be modified. If a claim is to be persisted in the directory after having been
+                 collected from the user, it needs to be added as a PersistedClaim in the ValidationTechnicalProfile referenced below, i.e.
                  in AAD-UserWriteUsingAlternativeSecurityId. -->
             <OutputClaim ClaimTypeReferenceId="displayName" />
             <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -892,11 +907,14 @@
             <OutputClaim ClaimTypeReferenceId="surName" />
           </OutputClaims>
           <ValidationTechnicalProfiles>
-		    <!--<ValidationTechnicalProfile ReferenceId="AzureFunctions-CheckEmailDomainWebHook" />-->
+		  					    <!-- TEST -->
+		    <ValidationTechnicalProfile ReferenceId="AAD-UserReadUsingOtherMails" />
+		    <!-- END TEST -->
 			<ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
 		  </ValidationTechnicalProfiles>
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
         </TechnicalProfile>
+		
         <!-- This technical profile uses a validation technical profile to authenticate the user. -->
         <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
           <DisplayName>Local Account Signin</DisplayName>
@@ -945,6 +963,7 @@
             <ValidationTechnicalProfile ReferenceId="AAD-UserReadUsingEmailAddress" />
           </ValidationTechnicalProfiles>
         </TechnicalProfile>
+		
         <TechnicalProfile Id="LocalAccountWritePasswordUsingObjectId">
           <DisplayName>Change password (username)</DisplayName>
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -1130,7 +1149,7 @@
             <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId-NoError" />
           </ClaimsExchanges>
         </OrchestrationStep>
-        <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId). 
+        <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId).
           This can only happen when authentication happened using a social IDP. If local account was created or authentication done
           using ESTS in step 2, then an user account must exist in the directory by this time. -->
         <OrchestrationStep Order="4" Type="ClaimsExchange">
@@ -1144,7 +1163,7 @@
             <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
           </ClaimsExchanges>
         </OrchestrationStep>
-        <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
+        <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent
           in the token. -->
         <OrchestrationStep Order="5" Type="ClaimsExchange">
           <Preconditions>
@@ -1158,8 +1177,8 @@
             <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
           </ClaimsExchanges>
         </OrchestrationStep>
-        <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect 
-             from the user. So, in that case, create the user in the directory if one does not already exist 
+        <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect
+             from the user. So, in that case, create the user in the directory if one does not already exist
              (verified using objectId which would be set from the last step if account was created in the directory. -->
         <OrchestrationStep Order="6" Type="ClaimsExchange">
           <Preconditions>
@@ -1185,8 +1204,8 @@
             <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
           </ClaimsExchanges>
         </OrchestrationStep>
-        <!-- Save MFA phone number: The precondition verifies whether the user provided a new number in the 
-             previous step. If so, then the phone number is stored in the directory for future authentication 
+        <!-- Save MFA phone number: The precondition verifies whether the user provided a new number in the
+             previous step. If so, then the phone number is stored in the directory for future authentication
              requests. -->
         <OrchestrationStep Order="8" Type="ClaimsExchange">
           <Preconditions>
@@ -1242,7 +1261,7 @@
           </ClaimsExchanges>
         </OrchestrationStep>
         <!-- If the user ever stepped up to use 2FA, profile update must verify this because the user will be able to change
-          their sign in email address or strong authentication email here. This guards against scenarios where a user's 
+          their sign in email address or strong authentication email here. This guards against scenarios where a user's
           password is stolen, the attacker can change the email addresses leaving no way for the user to recover their account.
           By requiring 2FA, stolen passwords cannot be used to take over the account completely. -->
         <OrchestrationStep Order="5" Type="ClaimsExchange">

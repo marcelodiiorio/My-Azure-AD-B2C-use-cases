@@ -7,6 +7,31 @@
      
   <ClaimsProviders>
   
+	<!--<ClaimsProvider>
+		<DisplayName>REST APIs</DisplayName>
+		<TechnicalProfiles>
+			<TechnicalProfile Id="AzureFunctions-CompareEmails">
+				<DisplayName>Check email domain Azure Function</DisplayName>
+				<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+				<Metadata>
+					<Item Key="ServiceUrl">https://b2c-compareemails.azurewebsites.net/api/HttpTriggerCSharp1?code=0MvgsOWSM7EZFRakk3o0e/EYnBHp3GCsuDcxNbnq2GMzUNLF8HJEow==</Item>
+					<Item Key="AuthenticationType">None</Item>
+					<Item Key="SendClaimsIn">Body</Item>
+				</Metadata>
+				<InputClaims>
+					<InputClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="LocalAccountEmail" />
+					<InputClaim ClaimTypeReferenceId="otherMails" PartnerClaimType="SocialIdPEmail" />
+				</InputClaims>
+				<UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+			</TechnicalProfile>
+			<TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+				<ValidationTechnicalProfiles>
+					<ValidationTechnicalProfile ReferenceId="AzureFunctions-CompareEmails" />
+				</ValidationTechnicalProfiles>
+			</TechnicalProfile>
+		</TechnicalProfiles>
+	</ClaimsProvider>-->
+  
     <ClaimsProvider>
       <DisplayName>Facebook</DisplayName>
       <TechnicalProfiles>
@@ -277,8 +302,7 @@
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>objectId</Value>
-              <Action>SkipThisOrchestrationStep</Action>
-			  
+              <Action>SkipThisOrchestrationStep</Action>			  
             </Precondition>
           </Preconditions>
           <ClaimsExchanges>
@@ -287,6 +311,7 @@
             <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
           </ClaimsExchanges>
         </OrchestrationStep>
+		
         <!-- For social IDP authentication, attempt to find the user account in the directory. -->
         <OrchestrationStep Order="3" Type="ClaimsExchange">
           <Preconditions>
