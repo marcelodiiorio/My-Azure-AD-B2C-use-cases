@@ -42,7 +42,7 @@
                 		<Item Key="SendClaimsIn">Body</Item>
             		</Metadata>
             		<InputClaims>
-				<!-- We use the signInName claim in case of the SelfAsserted-LocalAccountSignIn-Email technical profile -->
+				<!-- We use the email claim in case of the LocalAccountSignUpWithLogonEmail technical profile -->
                 		<InputClaim ClaimTypeReferenceId="email" PartnerClaimType="VerifiedEmail" />
             		</InputClaims>
             		<UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
