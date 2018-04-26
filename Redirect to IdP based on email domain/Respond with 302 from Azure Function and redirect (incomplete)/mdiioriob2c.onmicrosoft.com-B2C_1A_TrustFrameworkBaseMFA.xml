@@ -1045,7 +1045,7 @@
           </CryptographicKeys>
           <InputClaims />
           <OutputClaims />
-          <!-- <UseTechnicalProfileForSessionManagement ReferenceId="SM-WsFed" />-->
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-WsFed" />
         </TechnicalProfile>
         <TechnicalProfile Id="SM-WsFed">
           <DisplayName>Session Management Provider</DisplayName>

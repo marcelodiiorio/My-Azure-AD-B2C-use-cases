@@ -1,0 +1,25 @@
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc" PolicyId="B2C_1A_SignInSaml" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions" DeploymentMode="Development" UserJourneyRecorderEndpoint="https://b2crecorder.azurewebsites.net/stream?id=c89ab53e-e76d-47e7-809f-8e776bca80f1">
+  <BasePolicy>
+    <TenantId>mdiioriob2c.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="SignInSaml" />
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <!--<OutputTokenFormat>SAML11</OutputTokenFormat>-->
+
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <!--<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />-->
+        <OutputClaim ClaimTypeReferenceId="objectId" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="userPrincipalName" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>

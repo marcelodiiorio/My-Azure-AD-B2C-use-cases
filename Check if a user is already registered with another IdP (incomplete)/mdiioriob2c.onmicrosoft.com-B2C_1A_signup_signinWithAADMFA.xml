@@ -18,7 +18,8 @@
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" />
         <OutputClaim ClaimTypeReferenceId="identityProvider" />
-        <OutputClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" />
+        <!--<OutputClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" />-->
+		<OutputClaim ClaimTypeReferenceId="otherMails" />
       </OutputClaims>
       <SubjectNamingInfo ClaimType="sub" />
     </TechnicalProfile>
