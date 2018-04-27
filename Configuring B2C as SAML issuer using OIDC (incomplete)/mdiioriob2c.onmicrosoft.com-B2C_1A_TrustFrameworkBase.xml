@@ -910,6 +910,7 @@
             <Item Key="XmlSignatureAlgorithm">Sha256</Item>
           </Metadata>
           <CryptographicKeys>
+		    <Key Id="issuer_secret" StorageReferenceId="B2C_1A_B2CSamlCert" />
             <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
             <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
           </CryptographicKeys>
