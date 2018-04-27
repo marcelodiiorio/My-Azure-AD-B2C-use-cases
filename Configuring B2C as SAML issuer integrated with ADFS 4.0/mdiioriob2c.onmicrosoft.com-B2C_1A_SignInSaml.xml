@@ -40,12 +40,12 @@
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
         <OutputClaim ClaimTypeReferenceId="surname" />
-        <!--<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />-->
         <OutputClaim ClaimTypeReferenceId="objectId" />
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
       </OutputClaims>
       <SubjectNamingInfo ClaimType="userPrincipalName" />
+      <!--<SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/objectidentifier" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" ExcludeAsClaim="false"/>-->
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>
