@@ -5,6 +5,12 @@
   </BasePolicy>
   <RelyingParty>
     <DefaultUserJourney ReferenceId="SignInSaml" />
+	<UserJourneyBehaviors>
+		<!-- Possible values: Tenant, Application, Policy, or Disabled -->
+		<SingleSignOn Scope="Tenant" />
+		<SessionExpiryType>Absolute</SessionExpiryType>
+		<SessionExpiryInSeconds>86400</SessionExpiryInSeconds>
+	</UserJourneyBehaviors>
     <TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
       <Protocol Name="SAML2" />
