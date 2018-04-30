@@ -7,11 +7,11 @@
   <ClaimsProviders>
   
   <ClaimsProvider>
-    <Domain>marcelodiiorio.com</Domain>
-    <DisplayName>mdiiorio ADFS</DisplayName>
+    <Domain>marcelodiiorio.com-saml</Domain>
+    <DisplayName>mdiiorio ADFS - SAML</DisplayName>
     <TechnicalProfiles>
     <TechnicalProfile Id="mdiiorio-SAML2">
-        <DisplayName>mdiiorio ADFS - SAML2</DisplayName>
+        <DisplayName>mdiiorio ADFS - SAML</DisplayName>
         <Description>Login with your mdiiorio account</Description>
         <Protocol Name="SAML2"/>
         <Metadata>
@@ -23,6 +23,43 @@
         <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_ADFSSamlCert"/>
         <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_ADFSSamlCert"/>
         </CryptographicKeys>
+        <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="socialIdpUserId" PartnerClaimType="userPrincipalName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name"/>
+        <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="family_name"/>
+        <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email"/>
+        <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name"/>
+        <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="contoso.com" />
+        <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication"/>
+        </OutputClaims>
+        <OutputClaimsTransformations>
+        <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName"/>
+        <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName"/>
+        <OutputClaimsTransformation ReferenceId="CreateAlternativeSecurityId"/>
+        <OutputClaimsTransformation ReferenceId="CreateSubjectClaimFromAlternativeSecurityId"/>
+        </OutputClaimsTransformations>
+        <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop"/>
+    </TechnicalProfile>
+    </TechnicalProfiles>
+  </ClaimsProvider>
+  
+  <ClaimsProvider>
+    <Domain>marcelodiiorio.com-wsfed</Domain>
+    <DisplayName>mdiiorio ADFS - WS-Fed</DisplayName>
+    <TechnicalProfiles>
+    <TechnicalProfile Id="mdiiorio-WSFED">
+        <DisplayName>mdiiorio ADFS</DisplayName>
+        <Description>Login with your mdiiorio account</Description>
+        <Protocol Name="WsFed"/>
+        <Metadata>
+        <Item Key="RequestsSigned">false</Item>
+        <Item Key="WantsEncryptedAssertions">false</Item>
+        <Item Key="PartnerEntity">https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml</Item>
+        </Metadata>
+        <!--<CryptographicKeys>
+        <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_ADFSSamlCert"/>
+        <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_ADFSSamlCert"/>
+        </CryptographicKeys>-->
         <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="socialIdpUserId" PartnerClaimType="userPrincipalName" />
         <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name"/>
@@ -287,6 +324,7 @@
             <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
             <ClaimsProviderSelection TargetClaimsExchangeId="mdiiorioExchange" />
 			<ClaimsProviderSelection TargetClaimsExchangeId="mdiiorioExchange2" />
+			<ClaimsProviderSelection TargetClaimsExchangeId="mdiiorioExchange3" />
             <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
           </ClaimsProviderSelections>
           <ClaimsExchanges>
@@ -305,6 +343,7 @@
             <ClaimsExchange Id="FacebookExchange" TechnicalProfileReferenceId="Facebook-OAUTH" />
             <ClaimsExchange Id="mdiiorioExchange" TechnicalProfileReferenceId="mdiiorioProfile" />
 			<ClaimsExchange Id="mdiiorioExchange2" TechnicalProfileReferenceId="mdiiorio-SAML2" />
+			<ClaimsExchange Id="mdiiorioExchange3" TechnicalProfileReferenceId="mdiiorio-WSFED" />
             <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
           </ClaimsExchanges>
         </OrchestrationStep>
