@@ -20,9 +20,11 @@
         <!--<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />-->
         <OutputClaim ClaimTypeReferenceId="objectId" />
         <OutputClaim ClaimTypeReferenceId="email" />
-        <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
+        <!--<OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />-->
+		<OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
       </OutputClaims>
       <SubjectNamingInfo ClaimType="userPrincipalName" />
+       <!--<SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" ExcludeAsClaim="false"/>-->
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>

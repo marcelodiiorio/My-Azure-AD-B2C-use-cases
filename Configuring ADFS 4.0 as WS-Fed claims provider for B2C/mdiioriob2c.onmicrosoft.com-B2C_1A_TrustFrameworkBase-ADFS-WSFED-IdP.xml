@@ -1,4 +1,4 @@
-<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" PolicyId="B2C_1A_TrustFrameworkBase" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc">
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" PolicyId="B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc">
   <BuildingBlocks>
     <ClaimsSchema>
       <!-- The ClaimsSchema is divided into three sections:
@@ -180,7 +180,7 @@
           <Protocol Name="OAuth2" PartnerClaimType="upn" />
           <Protocol Name="OpenIdConnect" PartnerClaimType="upn" />
           <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userprincipalname" />
-          <Protocol Name="WsFed" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
+          <Protocol Name="WsFed" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />												   
         </DefaultPartnerClaimTypes>
         <UserHelpText>Your user name as stored in the Azure Active Directory.</UserHelpText>
       </ClaimType>

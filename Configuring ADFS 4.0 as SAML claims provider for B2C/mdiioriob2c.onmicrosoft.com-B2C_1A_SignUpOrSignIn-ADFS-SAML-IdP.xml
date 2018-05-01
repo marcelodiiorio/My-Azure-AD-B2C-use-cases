@@ -1,11 +1,15 @@
-<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc" PolicyId="B2C_1A_SignUpOrSignIn" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_SigUpOrSignIn" DeploymentMode="Development" UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc" PolicyId="B2C_1A_SignUpOrSignIn-ADFS-SAML-IdP" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_SigUpOrSignIn-ADFS-SAML-IdP" DeploymentMode="Development" UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
   <BasePolicy>
     <TenantId>mdiioriob2c.onmicrosoft.com</TenantId>
-    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions-ADFS-SAML-IdP</PolicyId>
   </BasePolicy>
   <RelyingParty>
     <DefaultUserJourney ReferenceId="SignUpOrSignInUsingmdiiorio" />
 	<UserJourneyBehaviors>
+		<!-- Possible values: Tenant, Application, Policy, or Disabled -->
+		<SingleSignOn Scope="Tenant" />
+		<SessionExpiryType>Absolute</SessionExpiryType>
+		<SessionExpiryInSeconds>86400</SessionExpiryInSeconds>
 		<JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="ff1613fb-4ecd-4329-a79a-0f0f4eeca336" DeveloperMode="true" ClientEnabled="false" ServerEnabled="true" TelemetryVersion="1.0.0" />
     </UserJourneyBehaviors>
     <TechnicalProfile Id="PolicyProfile">
