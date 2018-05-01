@@ -19,6 +19,7 @@
 				<!--<Item Key="RequestsSigned">false</Item>
 				<Item Key="WantsEncryptedAssertions">false</Item>-->
 				<Item Key="PartnerEntity">https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml</Item>
+				<Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP</Item>
 			</Metadata>
 			<OutputClaims>
 				<OutputClaim ClaimTypeReferenceId="socialIdpUserId" PartnerClaimType="userPrincipalName" />

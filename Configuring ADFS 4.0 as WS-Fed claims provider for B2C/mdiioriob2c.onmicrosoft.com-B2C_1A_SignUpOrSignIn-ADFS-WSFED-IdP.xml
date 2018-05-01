@@ -22,11 +22,11 @@
         <OutputClaim ClaimTypeReferenceId="givenName" />
         <OutputClaim ClaimTypeReferenceId="surname" />
         <!--<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />-->
-		<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="http://schemas.microsoft.com/identity/claims/objectidentifier" />
+		<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
 		<OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
       </OutputClaims>
-    <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/objectidentifier" />
+    <SubjectNamingInfo ClaimType="sub" />
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>
