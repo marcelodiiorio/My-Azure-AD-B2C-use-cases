@@ -22,11 +22,11 @@
         <OutputClaim ClaimTypeReferenceId="givenName" />
         <OutputClaim ClaimTypeReferenceId="surname" />
         <!--<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId" />-->
-        <OutputClaim ClaimTypeReferenceId="objectId" />
-        <OutputClaim ClaimTypeReferenceId="email" />
-        <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
+		<OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="http://schemas.microsoft.com/identity/claims/objectidentifier" />
+		<OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
       </OutputClaims>
-      <SubjectNamingInfo ClaimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" ExcludeAsClaim="false"/>
+    <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/objectidentifier" />
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>
