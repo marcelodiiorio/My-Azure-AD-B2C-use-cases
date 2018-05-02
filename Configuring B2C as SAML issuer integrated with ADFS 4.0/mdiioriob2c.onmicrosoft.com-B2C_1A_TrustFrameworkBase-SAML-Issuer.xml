@@ -846,6 +846,7 @@
             <PersistedClaim ClaimTypeReferenceId="identityProvider" />
             <PersistedClaim ClaimTypeReferenceId="newUser" />
             <PersistedClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" />
+			<PersistedClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="upn" />
           </PersistedClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectIdFromSession" DefaultValue="true" />
