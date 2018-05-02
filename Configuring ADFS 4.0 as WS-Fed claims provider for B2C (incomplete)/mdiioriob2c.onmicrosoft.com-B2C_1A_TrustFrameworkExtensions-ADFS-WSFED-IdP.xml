@@ -22,6 +22,7 @@
 				<Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP</Item>
 			</Metadata>
 			<OutputClaims>
+				<!--<OutputClaim ClaimTypeReferenceId="socialIdpUserId" PartnerClaimType="userPrincipalName" />-->
 				<OutputClaim ClaimTypeReferenceId="socialIdpUserId" PartnerClaimType="userPrincipalName" />
 				<OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name"/>
 				<OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="family_name"/>

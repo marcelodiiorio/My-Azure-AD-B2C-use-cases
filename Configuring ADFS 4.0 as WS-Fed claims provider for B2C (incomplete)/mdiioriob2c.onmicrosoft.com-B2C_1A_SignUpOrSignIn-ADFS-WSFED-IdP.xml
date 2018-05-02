@@ -27,6 +27,8 @@
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
       </OutputClaims>
     <SubjectNamingInfo ClaimType="sub" />
+	      <!--<SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="false"/>-->
+
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>
