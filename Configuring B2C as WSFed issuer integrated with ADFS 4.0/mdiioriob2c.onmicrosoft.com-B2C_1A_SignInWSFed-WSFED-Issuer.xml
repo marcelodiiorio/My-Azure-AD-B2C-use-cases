@@ -4,17 +4,20 @@
     <PolicyId>B2C_1A_TrustFrameworkExtensions-WSFED-Issuer</PolicyId>
   </BasePolicy>
   <RelyingParty>
+   	<!-- The below is the user journey stored in the extensions policy -->
     <DefaultUserJourney ReferenceId="SignInWsFed" />
 	<UserJourneyBehaviors>
-		<!-- Possible values: Tenant, Application, Policy, or Disabled -->
+		<!-- Possible values: Tenant, Application, Policy, or Disabled. This is explained in https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration. In this case
+		we are setting the scope to tenant, just for testing SSO between multiple policies, applications, and protocols -->
 		<SingleSignOn Scope="Tenant" />
 		<SessionExpiryType>Absolute</SessionExpiryType>
 		<SessionExpiryInSeconds>86400</SessionExpiryInSeconds>
+		<!-- This is added for troubleshooting purposes only. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-troubleshoot-custom for details. -->
+		<JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="ff1613fb-4ecd-4329-a79a-0f0f4eeca336" DeveloperMode="true" ClientEnabled="false" ServerEnabled="true" TelemetryVersion="1.0.0" />
 	</UserJourneyBehaviors>
     <TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
       <Protocol Name="WsFed" />
-      <!--<OutputTokenFormat>SAML11</OutputTokenFormat>-->
       <Metadata>
         <Item Key="PartnerEntity">
         https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml
@@ -42,6 +45,7 @@
           ]]></Item>
         <Item Key="client_id">customClientId</Item>
       </Metadata>
+	  <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -50,9 +54,15 @@
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
       </OutputClaims>
-      <!--<SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" ExcludeAsClaim="true" />-->
-       <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" ExcludeAsClaim="false"/>
-
+	  <!-- In this case we are using WS-Fed, so we need to format the SubjectNamingInfo claim as namespace/name. 
+	  The SubjectNamingInfo in namespace/name should be something like: 
+		   
+	  <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
+		   
+	  or 
+		   
+	  <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
+      <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="false"/>
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>
