@@ -123,7 +123,7 @@
   </ClaimsProviders>
   
   <UserJourneys>
-	  <!-- This is the user journey invoked from the relying party policy. -->
+	  <!-- This is the user journey invoked from the relying party policy (DefaultUserJourney element). -->
 	  <UserJourney Id="SignUpOrSignInUsingmdiiorio">
 		  <OrchestrationSteps>
 			<OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
