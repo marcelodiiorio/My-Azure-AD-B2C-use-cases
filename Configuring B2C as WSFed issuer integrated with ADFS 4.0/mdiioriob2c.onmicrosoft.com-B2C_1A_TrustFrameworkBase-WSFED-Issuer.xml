@@ -846,6 +846,7 @@
             <PersistedClaim ClaimTypeReferenceId="identityProvider" />
             <PersistedClaim ClaimTypeReferenceId="newUser" />
             <PersistedClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" />
+			<PersistedClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="upn" />
           </PersistedClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectIdFromSession" DefaultValue="true" />
@@ -865,7 +866,7 @@
             <PersistedClaim ClaimTypeReferenceId="AlternativeSecurityId" />
           </PersistedClaims>
         </TechnicalProfile>
-        <TechnicalProfile Id="SM-WsFed">
+		<TechnicalProfile Id="SM-WsFed">
           <DisplayName>Session Management Provider</DisplayName>
           <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.WsFedSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
         </TechnicalProfile>
