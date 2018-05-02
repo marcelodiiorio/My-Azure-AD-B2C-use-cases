@@ -48,7 +48,7 @@
     </TechnicalProfile>
     </TechnicalProfiles>
   </ClaimsProvider>
-  
+    <!-- This is for Facebook as IdP using custom policies. -->
     <ClaimsProvider>
       <DisplayName>Facebook</DisplayName>
       <TechnicalProfiles>
@@ -61,6 +61,8 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+	
+	<!-- This is for local accounts. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started-custom -->
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
       <TechnicalProfiles>
@@ -76,6 +78,9 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+	
+	<!-- This is for Azure AD (single-tenant) as IdP using custom policies. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-aad-custom. 
+	For multi-tenant scenario, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-commonaad-custom -->
     <ClaimsProvider>
       <Domain>mdiiorio</Domain>
       <DisplayName>Login using mdiiorio</DisplayName>
