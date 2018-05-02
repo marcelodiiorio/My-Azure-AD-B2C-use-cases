@@ -943,6 +943,7 @@
           </Metadata>
 		  <!-- The below elements points to the key created during the uploading of the certificate -->
           <CryptographicKeys>
+			<Key Id="client_secret" StorageReferenceId="B2C_1A_RequestSamlTokens" />
             <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
             <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
           </CryptographicKeys>
