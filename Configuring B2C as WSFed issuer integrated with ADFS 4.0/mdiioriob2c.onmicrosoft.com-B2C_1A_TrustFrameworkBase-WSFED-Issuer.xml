@@ -829,6 +829,7 @@
       </TechnicalProfiles>
     </ClaimsProvider>
     <ClaimsProvider>
+	  <!-- For details on the session management profiles below, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-sso-custom -->
       <DisplayName>Session Management</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="SM-Noop">
@@ -864,6 +865,10 @@
             <PersistedClaim ClaimTypeReferenceId="AlternativeSecurityId" />
           </PersistedClaims>
         </TechnicalProfile>
+        <TechnicalProfile Id="SM-WsFed">
+          <DisplayName>Session Management Provider</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.WsFedSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+        </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
     <ClaimsProvider>
@@ -897,52 +902,46 @@
           <InputClaims />
           <OutputClaims />
         </TechnicalProfile>
-        <TechnicalProfile Id="Saml2AssertionIssuer">
-          <DisplayName>Token Issuer</DisplayName>
-          <Protocol Name="None" />
-          <OutputTokenFormat>SAML2</OutputTokenFormat>
-          <Metadata>
-            <Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml</Item>
-            <!--<Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInSaml/samlp/metadata</Item>-->
-            <!--<Item Key="IssuerUri">https://login.microsoftonline.com/mdiioriob2c.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignInSaml</Item>-->
-            <Item Key="KeyEncryptionMethod">Rsa15</Item>
-            <Item Key="DataEncryptionMethod">Aes256</Item>
-            <Item Key="XmlSignatureAlgorithm">Sha256</Item>
-          </Metadata>
-          <CryptographicKeys>
-            <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-            <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-          </CryptographicKeys>
-          <InputClaims />
-          <OutputClaims />
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Saml" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="SM-Saml">
-          <DisplayName>Session Management Provider</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-        </TechnicalProfile>
         <TechnicalProfile Id="WsFedIssuer">
           <DisplayName>Token Issuer</DisplayName>
           <Protocol Name="None" />
           <OutputTokenFormat>SAML11</OutputTokenFormat>
           <Metadata>
             <Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInWsFed-WSFED-Issuer</Item>
-            <!--<Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInWsFed/wsfed/metadata</Item>-->
+			<!-- For simplicity, you can use the metadata URL (below) of the WS-Fed issuer to automate the configuration of the claims provider trust in ADFS or the STS of your choice. The below explanation summarizes the most important things to take into account while configuring B2C as WS-Fed issuer. The procedure is similar to configuring a SAML2 issuer, and it's documented here as well https://github.com/Azure-Samples/active-directory-b2c-advanced-policies/blob/master/Walkthroughs/RP-SAML.md
+			
+					<Item Key="PartnerEntity"><Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInWsFed/wsfed/metadata</Item> 
+					
+					Otherwise, you can configure it manually. 
+					
+					In ADFS, you need to use the following:
+					
+						- Identifier URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInWsFed
+						
+						- Endpoints: 
+							Type: WS-Federation.
+							Binding: Redirect.
+							URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInWsFed/WSFed/SSO/LOGIN
+							
+							Type: SAML SSO.
+							Binding: Redirect.
+							URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInWsFed/WSFed/SSO/LOGIN
+							
+						- Certificates: The same uploaded to Policy keys in the AAD B2C portal.					
+			-->
             <Item Key="KeyEncryptionMethod">Rsa15</Item>
             <Item Key="DataEncryptionMethod">Aes256</Item>
             <Item Key="XmlSignatureAlgorithm">Sha256</Item>
           </Metadata>
+		  <!-- The below elements points to the key created during the uploading of the certificate. Note that we are using the same as in the SAML issuer scenario -->
           <CryptographicKeys>
             <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
             <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
           </CryptographicKeys>
           <InputClaims />
           <OutputClaims />
+		  <!-- This is available in the session management claims provider in this policy -->
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-WsFed" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="SM-WsFed">
-          <DisplayName>Session Management Provider</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.WsFedSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
