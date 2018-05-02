@@ -897,53 +897,6 @@
           <InputClaims />
           <OutputClaims />
         </TechnicalProfile>
-        <TechnicalProfile Id="Saml2AssertionIssuer">
-          <DisplayName>Token Issuer</DisplayName>
-          <Protocol Name="None" />
-          <OutputTokenFormat>SAML2</OutputTokenFormat>
-          <Metadata>
-            <Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml</Item>
-            <!--<Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInSaml/samlp/metadata</Item>-->
-            <!--<Item Key="IssuerUri">https://login.microsoftonline.com/mdiioriob2c.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignInSaml</Item>-->
-            <Item Key="KeyEncryptionMethod">Rsa15</Item>
-            <Item Key="DataEncryptionMethod">Aes256</Item>
-            <Item Key="XmlSignatureAlgorithm">Sha256</Item>
-          </Metadata>
-          <CryptographicKeys>
-            <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-            <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-          </CryptographicKeys>
-          <InputClaims />
-          <OutputClaims />
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Saml" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="SM-Saml">
-          <DisplayName>Session Management Provider</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="WsFedIssuer">
-          <DisplayName>Token Issuer</DisplayName>
-          <Protocol Name="None" />
-          <OutputTokenFormat>SAML11</OutputTokenFormat>
-          <Metadata>
-            <Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInWsFed</Item>
-            <!--<Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInWsFed/wsfed/metadata</Item>-->
-            <Item Key="KeyEncryptionMethod">Rsa15</Item>
-            <Item Key="DataEncryptionMethod">Aes256</Item>
-            <Item Key="XmlSignatureAlgorithm">Sha256</Item>
-          </Metadata>
-          <CryptographicKeys>
-            <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-            <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-          </CryptographicKeys>
-          <InputClaims />
-          <OutputClaims />
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-WsFed" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="SM-WsFed">
-          <DisplayName>Session Management Provider</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.WsFedSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-        </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
   </ClaimsProviders>
