@@ -941,9 +941,10 @@
             <Item Key="DataEncryptionMethod">Aes256</Item>
             <Item Key="XmlSignatureAlgorithm">Sha256</Item>
           </Metadata>
-		  <!-- The below elements points to the key created during the uploading of the certificate -->
           <CryptographicKeys>
+		    <!-- The client_secret was created for testing purposes, and it's not needed in this use case. You can remove it if you want -->
 			<Key Id="client_secret" StorageReferenceId="B2C_1A_RequestSamlTokens" />
+			<!-- the two keys below were created by uploading the certificate, as indicated in the documentation -->
             <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
             <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
           </CryptographicKeys>
