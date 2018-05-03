@@ -16,4 +16,8 @@ Endpoints:
 	Type: WS-Federation.
 	Trusted URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP
 	
+The sample claims-aware application is available here https://blogs.technet.microsoft.com/tangent_thoughts/2015/02/20/install-and-configure-a-simple-net-4-5-sample-federated-application-samapp/
+
+The web.config file is provided as part of this use case.
+	
 The policy files contains additional comments and instructions.
