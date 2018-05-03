@@ -18,6 +18,11 @@ Without &prompt=login
 
 https://login.microsoftonline.com/mdiioriob2c.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_SignUpOrSignIn-OIDC&client_id=d72eacfc-4ce2-4f86-a859-fc8da75fba50&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.io&scope=openid&response_type=id_token
 
+An easy test you  can do:
+
+1. Run any policy, even those related to SAML/WS-Fed issuers, and sign-in. Don't close the browser.
+2. Open a new tab and run the policy mentioned above, without &prompt=login.
+3. You should experience SSO.
 
 
 
