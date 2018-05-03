@@ -32,7 +32,7 @@ https://login.microsoftonline.com/mdiioriob2c.onmicrosoft.com/oauth2/v2.0/author
 
 An easy test you  can do:
 
-1. Run any policy, even those related to SAML/WS-Fed issuers, and sign-in. Don't close the browser.
+1. Run any policy, even those related to SAML/WS-Fed issuers, and sign-in. Don't close the browser. The policies must have the corresponding session behavior settings configured. If you try running a policy that has, for example, SSO "disabled" or "policy", when you jump to another policy you will be prompted for credentials.
 2. Open a new tab and run the policy mentioned above, without &prompt=login.
 3. You should experience SSO.
 
