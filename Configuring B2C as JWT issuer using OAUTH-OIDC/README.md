@@ -16,7 +16,7 @@ In case needed, the session management technical profile for WS-Fed is:
           <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.WsFedSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
 </TechnicalProfile>
 ```
-And it's referenced from the WsFedIssuer from here
+And it's referenced from the WsFedIssuer:
 ```
 <UseTechnicalProfileForSessionManagement ReferenceId="SM-WsFed" />
 ```
