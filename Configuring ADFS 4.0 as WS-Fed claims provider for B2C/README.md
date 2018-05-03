@@ -4,7 +4,7 @@ You can configure pretty much everything by following this document https://docs
 
 Things to consider:
 
-- We are using WS-Fed, so the SubjectNamingInfo claim must be in the format namespace/name. An easy fix for this is to edit the claims rule on the ADFS side, to configure the User-Principal-Name claim 
+We are using WS-Fed, so the SubjectNamingInfo claim must be in the format namespace/name. An easy fix for this is to edit the claims rule on the ADFS side, to configure the User-Principal-Name claim 
 in the following way:
 
 LDAP Attribute = User-Principal-Name.
