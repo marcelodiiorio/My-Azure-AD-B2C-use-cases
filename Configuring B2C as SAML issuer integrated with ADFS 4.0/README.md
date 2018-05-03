@@ -23,5 +23,11 @@ Remember that if you do any change on the B2C side that may change the informati
 
 The sample claims-aware application is available here https://blogs.technet.microsoft.com/tangent_thoughts/2015/02/20/install-and-configure-a-simple-net-4-5-sample-federated-application-samapp/
 
-The web.config file is provided as part of this use case.
+An export of the relying party trust is available as part of the files of this use case. One important thing to take into account, is that you must configure the ClaimsProviderName property, to add the B2C SAML issuer so it appear as available for signing-in. For this, you must run:
+
+Set-AdfsRelyingPartyTrust -TargetName "<Name of your test app>" -ClaimsProviderName @("Active Directory","B2C SAML2")
+
+Where B2C SAML2 is the name of the Claims Provider Trusts you have previously added. If you want to add more claims providers, just add ", <CPT name>" to the command above. If you don't append to existing content, you will remove all the CPTs, leaving only the new one.
+
+The web.config file is provided as part of this use case, as well as an export of the claims provider trust settings.
 	
