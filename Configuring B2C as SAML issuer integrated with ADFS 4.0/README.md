@@ -20,4 +20,8 @@ How to test:
 Access to https://YourADFSFarm/adfs/ls/idpInitiatedSignOn.aspx, or the url of your internal application published through Web Application Proxy. Select your B2C tenant for signing-in, and enter credentials of a B2C tenant user. If you get an error, you can troubleshoot by checking the ADFS log, or use Application Insights (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-troubleshoot-custom).
 
 Remember that if you do any change on the B2C side that may change the information provided through the metadata URL, you must trigger an update of the claims provider trust in ADFS, if you are using metadata to pull the different parameters from B2C.
+
+The sample claims-aware application is available here https://blogs.technet.microsoft.com/tangent_thoughts/2015/02/20/install-and-configure-a-simple-net-4-5-sample-federated-application-samapp/
+
+The web.config file is provided as part of this use case.
 	
