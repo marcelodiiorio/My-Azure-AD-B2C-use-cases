@@ -64,7 +64,7 @@
 				<!-- Replace sts.marcelodiiorio.com with your own ADFS farm -->
 				<Item Key="PartnerEntity">https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml</Item>
 				<!-- For WS-Fed, we need to specify the issuer URI -->
-				<Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP</Item>
+				<Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_TrustFrameworkBase-ADFS-SAML_WSFED-IdP</Item>
 			</Metadata>
 			<!-- The output claims below must contain at least the claims that are expected to be issued in the resulting token. See <OutputClaims> in the relying party policy. -->
 			<OutputClaims>
@@ -164,7 +164,7 @@
   
   <UserJourneys>
 	  <!-- This is the user journey invoked from the relying party policy (DefaultUserJourney element). -->
-	  <UserJourney Id="SignUpOrSignInUsingmdiiorio">
+	  <UserJourney Id="SignUpOrSignInUsingmdiiorio-Consolidated">
 		  <OrchestrationSteps>
 			<OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
 			  <ClaimsProviderSelections>
