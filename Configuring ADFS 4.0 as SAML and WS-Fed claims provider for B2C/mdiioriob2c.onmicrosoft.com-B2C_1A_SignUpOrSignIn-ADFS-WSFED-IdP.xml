@@ -1,0 +1,43 @@
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="mdiioriob2c.onmicrosoft.com" TenantObjectId="dc42c495-8e12-4e70-94c8-4c0c2bd414fc" PolicyId="B2C_1A_SignUpOrSignIn-ADFS-WSFED-IdP" PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_SigUpOrSignIn-ADFS-WSFED-IdP" DeploymentMode="Development" UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+  <BasePolicy>
+    <TenantId>mdiioriob2c.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions-ADFS-SAML_WSFED-IdP</PolicyId>
+  </BasePolicy>
+  <RelyingParty>
+ 	<!-- The below is the user journey stored in the extensions policy -->
+    <DefaultUserJourney ReferenceId="SignUpOrSignInUsingmdiiorio" />
+	<UserJourneyBehaviors>
+		<!-- Possible values: Tenant, Application, Policy, or Disabled. This is explained in https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration. In this case
+		we are setting the scope to tenant, just for testing SSO between multiple policies, applications, and protocols -->
+		<SingleSignOn Scope="Tenant" />
+		<SessionExpiryType>Absolute</SessionExpiryType>
+		<SessionExpiryInSeconds>86400</SessionExpiryInSeconds>
+		<!-- This is added for troubleshooting purposes only. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-troubleshoot-custom for details. -->
+		<JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="ff1613fb-4ecd-4329-a79a-0f0f4eeca336" DeveloperMode="true" ClientEnabled="false" ServerEnabled="true" TelemetryVersion="1.0.0" />
+    </UserJourneyBehaviors>
+	<TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+	  <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+		<OutputClaim ClaimTypeReferenceId="objectId" />
+		<OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
+      </OutputClaims>
+	  <!-- In this case we are using SAML2, so there is no need the format of the SubjectNamingInfo claim be namespace/name. That is the case when using SAML1.1 (WS-Fed, for example).
+		   The SubjectNamingInfo in namespace/name should be something like: 
+		   
+		   <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
+		   
+		   or 
+		   
+		   <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />
+		   
+		   See Readme.md file for details on how to configure the claims rule in ADFS when using WS-Fed. -->
+	  <SubjectNamingInfo ClaimType="userPrincipalName" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
