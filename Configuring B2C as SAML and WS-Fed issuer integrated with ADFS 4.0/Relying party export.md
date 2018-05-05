@@ -7,7 +7,7 @@ PublishedThroughProxy                : False
 SigningCertificateRevocationCheck    : None
 WSFedEndpoint                        : https://app1.marcelodiiorio.com/sampapp/
 AdditionalWSFedEndpoint              : {}
-ClaimsProviderName                   : {Active Directory, B2C WS-Fed, B2C SAML2, B2C WS-Fed}
+ClaimsProviderName                   : {Active Directory, B2C WS-Fed, B2C SAML2}
 ClaimsAccepted                       : {}
 EncryptClaims                        : True
 Enabled                              : True
