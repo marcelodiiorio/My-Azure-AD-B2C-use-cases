@@ -25,7 +25,7 @@
         <OutputClaim ClaimTypeReferenceId="surname" />
 		<OutputClaim ClaimTypeReferenceId="objectId" />
 		<OutputClaim ClaimTypeReferenceId="email" />
-        <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
+        <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
       </OutputClaims>
 	  <!-- In this case we are using SAML2, so there is no need the format of the SubjectNamingInfo claim be namespace/name. That is the case when using SAML1.1 (WS-Fed, for example).
 		   The SubjectNamingInfo in namespace/name should be something like: 
@@ -37,7 +37,7 @@
 		   <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />
 		   
 		   See Readme.md file for details on how to configure the claims rule in ADFS when using WS-Fed. -->
-	  <SubjectNamingInfo ClaimType="userPrincipalName" />
+	  <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="false" />
     </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>
