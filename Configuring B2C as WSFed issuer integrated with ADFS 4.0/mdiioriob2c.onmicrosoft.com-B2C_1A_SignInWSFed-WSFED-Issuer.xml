@@ -4,7 +4,7 @@
     <PolicyId>B2C_1A_TrustFrameworkExtensions-WSFED-Issuer</PolicyId>
   </BasePolicy>
   <RelyingParty>
-   	<!-- The below is the user journey stored in the extensions policy -->
+    <!-- The below is the user journey stored in the extensions policy -->
     <DefaultUserJourney ReferenceId="SignInWsFed" />
 	<UserJourneyBehaviors>
 		<!-- Possible values: Tenant, Application, Policy, or Disabled. This is explained in https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration. In this case
@@ -22,12 +22,13 @@
         <Item Key="PartnerEntity">
         https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml
 		
-          <!--<![CDATA[
+        <!--<![CDATA[
 					<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="urn:itfoxtec:identity:saml2:testwebapp" validUntil="2026-12-27T23:42:22.079Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 					<md:SPSSODescriptor WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
 					<md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
 					<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost/Auth/AssertionConsumerService" index="0" isDefault="true"/> </md:SPSSODescriptor> </md:EntityDescriptor>
-				]]>--></Item>
+				]]>-->
+	</Item>
         <!-- Demo: SAML 2 attribute cncoding info -->
         <Item Key="Saml2AttributeEncodingInfo"><![CDATA[ 
 			<saml2:AttributeStatement xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
@@ -42,10 +43,11 @@
 				<saml:Attribute AttributeName="ImmutableID" AttributeNamespace="http://schemas.microsoft.com/LiveID/Federation/2008/05">
 					<saml:AttributeValue></saml:AttributeValue></saml:Attribute><saml:Attribute AttributeName="UPN" AttributeNamespace="http://schemas.xmlsoap.org/claims">
 					<saml:AttributeValue></saml:AttributeValue></saml:Attribute></saml:AttributeStatement> 
-          ]]></Item>
+          ]]>
+	</Item>
         <Item Key="client_id">customClientId</Item>
       </Metadata>
-	  <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
+      <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -54,14 +56,14 @@
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
       </OutputClaims>
-	  <!-- In this case we are using WS-Fed, so we need to format the SubjectNamingInfo claim as namespace/name. 
-	  The SubjectNamingInfo in namespace/name should be something like: 
+      <!-- In this case we are using WS-Fed, so we need to format the SubjectNamingInfo claim as namespace/name. 
+      The SubjectNamingInfo in namespace/name should be something like: 
 		   
-	  <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
+      <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
 		   
-	  or 
+      or 
 		   
-	  <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
+      <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
       <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="false"/>
     </TechnicalProfile>
   </RelyingParty>
