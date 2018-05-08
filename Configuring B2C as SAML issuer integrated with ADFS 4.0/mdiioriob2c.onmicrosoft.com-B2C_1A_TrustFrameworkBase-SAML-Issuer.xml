@@ -801,7 +801,7 @@
             <OutputClaim ClaimTypeReferenceId="objectId" />
             <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
             <OutputClaim ClaimTypeReferenceId="authenticationSource" />
-          </OutputClaims>
+	  </OutputClaims>
           <ValidationTechnicalProfiles>
             <ValidationTechnicalProfile ReferenceId="AAD-UserReadUsingEmailAddress" />
           </ValidationTechnicalProfiles>
@@ -829,7 +829,7 @@
       </TechnicalProfiles>
     </ClaimsProvider>
     <ClaimsProvider>
-	  <!-- For details on the session management profiles below, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-sso-custom -->
+    <!-- For details on the session management profiles below, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-sso-custom -->
       <DisplayName>Session Management</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="SM-Noop">
@@ -846,7 +846,7 @@
             <PersistedClaim ClaimTypeReferenceId="identityProvider" />
             <PersistedClaim ClaimTypeReferenceId="newUser" />
             <PersistedClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" />
-			<PersistedClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="upn" />
+	    <PersistedClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="upn" />
           </PersistedClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectIdFromSession" DefaultValue="true" />
@@ -867,8 +867,8 @@
           </PersistedClaims>
         </TechnicalProfile>
 		<TechnicalProfile Id="SM-Saml">
-          <DisplayName>Session Management Provider</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          	<DisplayName>Session Management Provider</DisplayName>
+          	<Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
@@ -909,48 +909,48 @@
           <OutputTokenFormat>SAML2</OutputTokenFormat>
           <Metadata>
             <Item Key="IssuerUri">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer</Item>
-			<!-- For simplicity, you can use the metadata URL (below) of the SAML issuer to automate the configuration of the claims provider trust in ADFS or the STS of your choice. The below explanation summarizes the most important things to take into account while configuring B2C as SAML issuer. The procedure is documented here as well https://github.com/Azure-Samples/active-directory-b2c-advanced-policies/blob/master/Walkthroughs/RP-SAML.md
+	    <!-- For simplicity, you can use the metadata URL (below) of the SAML issuer to automate the configuration of the claims provider trust in ADFS or the STS of your choice. The below explanation summarizes the most important things to take into account while configuring B2C as SAML issuer. The procedure is documented here as well https://github.com/Azure-Samples/active-directory-b2c-advanced-policies/blob/master/Walkthroughs/RP-SAML.md
 			
-					<Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInSaml/samlp/metadata</Item> 
+	    <Item Key="PartnerEntity">https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/b2c_1A_SignInSaml/samlp/metadata</Item> 
 					
-					Otherwise, you can configure it manually. 
+	    Otherwise, you can configure it manually. 
 					
-					In ADFS, you need to use the following:
+	    In ADFS, you need to use the following:
 					
-						- Identifier URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer
-						- Endpoints: 
-							Type: SAML SSO.
-							Binding: POST
-							URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/login
+	    Identifier URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer
+	    Endpoints: 
+	    	Type: SAML SSO.
+		Binding: POST
+		URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/login
 							
-							Type: SAML SSO.
-							Binding: Redirect.
-							URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/login
+		Type: SAML SSO.
+		Binding: Redirect.
+		URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/login
 							
-							Type: SAML Logout.
-							Binding: POST.
-							URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/logout
+		Type: SAML Logout.
+		Binding: POST.
+		URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/logout
 							
-							Type:SAML SSO.
-							Binding: Redirect.
-							URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/logout
+		Type:SAML SSO.
+		Binding: Redirect.
+		URL: https://login.microsoftonline.com/te/mdiioriob2c.onmicrosoft.com/B2C_1A_SignInSaml-SAML-Issuer/samlp/sso/logout
 							
-						- Certificates: The same uploaded to Policy keys in the AAD B2C portal.					
-			-->
+		Certificates: The same uploaded to Policy keys in the AAD B2C portal.					
+	    -->
             <Item Key="KeyEncryptionMethod">Rsa15</Item>
             <Item Key="DataEncryptionMethod">Aes256</Item>
             <Item Key="XmlSignatureAlgorithm">Sha256</Item>
           </Metadata>
           <CryptographicKeys>
-		    <!-- The client_secret was created for testing purposes, and it's not needed in this use case. You can remove it if you want -->
-			<Key Id="client_secret" StorageReferenceId="B2C_1A_RequestSamlTokens" />
-			<!-- the two keys below were created by uploading the certificate, as indicated in the documentation -->
-            <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
-            <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
+          	<!-- The client_secret was created for testing purposes, and it's not needed in this use case. You can remove it if you want -->
+		<Key Id="client_secret" StorageReferenceId="B2C_1A_RequestSamlTokens" />
+		<!-- the two keys below were created by uploading the certificate, as indicated in the documentation -->
+            	<Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
+            	<Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_B2CSamlCert" />
           </CryptographicKeys>
           <InputClaims />
           <OutputClaims />
-		  <!-- This is available in the session management claims provider in this policy -->
+          <!-- This is available in the session management claims provider in this policy -->
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-Saml" />
         </TechnicalProfile>
       </TechnicalProfiles>
