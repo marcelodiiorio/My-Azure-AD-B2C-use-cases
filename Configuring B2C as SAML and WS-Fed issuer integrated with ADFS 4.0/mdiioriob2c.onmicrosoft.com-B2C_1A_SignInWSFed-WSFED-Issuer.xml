@@ -22,30 +22,33 @@
         <Item Key="PartnerEntity">
         https://sts.marcelodiiorio.com/federationmetadata/2007-06/federationmetadata.xml
 		
-          <!--<![CDATA[
-					<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="urn:itfoxtec:identity:saml2:testwebapp" validUntil="2026-12-27T23:42:22.079Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-					<md:SPSSODescriptor WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-					<md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
-					<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost/Auth/AssertionConsumerService" index="0" isDefault="true"/> </md:SPSSODescriptor> </md:EntityDescriptor>
-				]]>--></Item>
+        <!--<![CDATA[
+		<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="urn:itfoxtec:identity:saml2:testwebapp" validUntil="2026-12-27T23:42:22.079Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+		<md:SPSSODescriptor WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+		<md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+		<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost/Auth/AssertionConsumerService" index="0" isDefault="true"/> </md:SPSSODescriptor> </md:EntityDescriptor>
+		]]>-->
+	</Item>
         <!-- Demo: SAML 2 attribute cncoding info -->
         <Item Key="Saml2AttributeEncodingInfo"><![CDATA[ 
-			<saml2:AttributeStatement xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
-				<saml2:Attribute FriendlyName="userPrincipalName" Name="UserId" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
-					<saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string"></saml2:AttributeValue>
-				</saml2:Attribute>
-			</saml2:AttributeStatement> 
-			]]></Item>
+		<saml2:AttributeStatement xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
+		<saml2:Attribute FriendlyName="userPrincipalName" Name="UserId" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+		<saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string"></saml2:AttributeValue>
+		</saml2:Attribute>
+		</saml2:AttributeStatement> 
+		]]>
+	</Item>
         <!-- Demo: SAML 1.1 attribute cncoding info -->
         <Item Key="Saml11AttributeEncodingInfo"><![CDATA[ 
-			<saml:AttributeStatement xmlns:saml="urn:oasis:names:tc:SAML:1.0:assertion">
-				<saml:Attribute AttributeName="ImmutableID" AttributeNamespace="http://schemas.microsoft.com/LiveID/Federation/2008/05">
-					<saml:AttributeValue></saml:AttributeValue></saml:Attribute><saml:Attribute AttributeName="UPN" AttributeNamespace="http://schemas.xmlsoap.org/claims">
-					<saml:AttributeValue></saml:AttributeValue></saml:Attribute></saml:AttributeStatement> 
-          ]]></Item>
+		<saml:AttributeStatement xmlns:saml="urn:oasis:names:tc:SAML:1.0:assertion">
+		<saml:Attribute AttributeName="ImmutableID" AttributeNamespace="http://schemas.microsoft.com/LiveID/Federation/2008/05">
+		<saml:AttributeValue></saml:AttributeValue></saml:Attribute><saml:Attribute AttributeName="UPN" AttributeNamespace="http://schemas.xmlsoap.org/claims">
+		<saml:AttributeValue></saml:AttributeValue></saml:Attribute></saml:AttributeStatement> 
+        	]]>
+	</Item>
         <Item Key="client_id">customClientId</Item>
       </Metadata>
-	  <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
+      <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -54,14 +57,14 @@
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
       </OutputClaims>
-	  <!-- In this case we are using WS-Fed, so we need to format the SubjectNamingInfo claim as namespace/name. 
+      <!-- In this case we are using WS-Fed, so we need to format the SubjectNamingInfo claim as namespace/name. 
 	  The SubjectNamingInfo in namespace/name should be something like: 
 		   
-	  <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
+      <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
 		   
-	  or 
+      or 
 		   
-	  <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
+      <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
       <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="false"/>
     </TechnicalProfile>
   </RelyingParty>
