@@ -19,7 +19,7 @@
       </TechnicalProfiles>
     </ClaimsProvider>
 	
-	<!-- This is for local accounts. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started-custom -->
+    <!-- This is for local accounts. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started-custom -->
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
       <TechnicalProfiles>
@@ -36,8 +36,8 @@
       </TechnicalProfiles>
     </ClaimsProvider>
 	
-	<!-- This is for Azure AD (single-tenant) as IdP using custom policies. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-aad-custom. 
-	For multi-tenant scenario, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-commonaad-custom -->
+    <!-- This is for Azure AD (single-tenant) as IdP using custom policies. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-aad-custom. 
+    For multi-tenant scenario, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-commonaad-custom -->
     <ClaimsProvider>
       <Domain>mdiiorio</Domain>
       <DisplayName>Login using mdiiorio</DisplayName>
@@ -84,12 +84,12 @@
       <OrchestrationSteps>
         <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
           <ClaimsProviderSelections>
-			<!-- These elements make reference to elements in the orchestration step no. 2, except for LocalAccountSigninEmailExchange, which is in this same orchestration step. -->
+	    <!-- These elements make reference to elements in the orchestration step no. 2, except for LocalAccountSigninEmailExchange, which is in this same orchestration step. -->
             <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
             <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
           </ClaimsProviderSelections>
           <ClaimsExchanges>
-			<!-- The TechnicalProfileReferenceId mentioned below, makes reference to the technical profile that can be found in the base policy. -->
+            <!-- The TechnicalProfileReferenceId mentioned below, makes reference to the technical profile that can be found in the base policy. -->
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
           </ClaimsExchanges>
         </OrchestrationStep>
@@ -102,7 +102,7 @@
             </Precondition>
           </Preconditions>
           <ClaimsExchanges>
-			<!-- The technical profiles below can be found in the base policy. -->
+	    <!-- The technical profiles below can be found in the base policy. -->
             <ClaimsExchange Id="FacebookExchange" TechnicalProfileReferenceId="Facebook-OAUTH" />
             <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
           </ClaimsExchanges>
@@ -162,7 +162,7 @@
             <ClaimsExchange Id="AADUserWrite" TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
           </ClaimsExchanges>
         </OrchestrationStep>
-		<!-- A SAML2 token is issued during the last orchestration step. This is why we invoke the Saml2AssertionIssuer technical profile located in the base policy. -->
+	<!-- A SAML2 token is issued during the last orchestration step. This is why we invoke the Saml2AssertionIssuer technical profile located in the base policy. -->
         <OrchestrationStep Order="7" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="Saml2AssertionIssuer" />
       </OrchestrationSteps>
       <ClientDefinition ReferenceId="DefaultWeb" />
