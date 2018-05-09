@@ -18,7 +18,7 @@
 	<TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
       <Protocol Name="OpenIdConnect" />
-	  <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
+      <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -27,16 +27,16 @@
 		<OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" />
       </OutputClaims>
-	  <!-- In this case we are using SAML2, so there is no need the format of the SubjectNamingInfo claim be namespace/name. That is the case when using SAML1.1 (WS-Fed, for example).
-		   The SubjectNamingInfo in namespace/name should be something like: 
+	 <!-- In this case we are using SAML2, so there is no need the format of the SubjectNamingInfo claim be namespace/name. That is the case when using SAML1.1 (WS-Fed, for example).
+	 The SubjectNamingInfo in namespace/name should be something like: 
 		   
-		   <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
+	 <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
 		   
-		   or 
+	  or 
 		   
-		   <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />
+	  <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />
 		   
-		   See Readme.md file for details on how to configure the claims rule in ADFS when using WS-Fed. -->
+          See Readme.md file for details on how to configure the claims rule in ADFS when using WS-Fed. -->
 	  <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="false" />
     </TechnicalProfile>
   </RelyingParty>
