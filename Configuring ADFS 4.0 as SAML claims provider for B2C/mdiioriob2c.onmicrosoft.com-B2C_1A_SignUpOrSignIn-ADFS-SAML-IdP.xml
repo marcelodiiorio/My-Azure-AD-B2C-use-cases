@@ -4,7 +4,7 @@
     <PolicyId>B2C_1A_TrustFrameworkExtensions-ADFS-SAML-IdP</PolicyId>
   </BasePolicy>
   <RelyingParty>
-	<!-- The below is the user journey stored in the extensions policy -->
+  <!-- The below is the user journey stored in the extensions policy -->
     <DefaultUserJourney ReferenceId="SignUpOrSignInUsingmdiiorio" />
 	<UserJourneyBehaviors>
 		<!-- Possible values: Tenant, Application, Policy, or Disabled. This is explained in https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration. In this case
@@ -18,7 +18,7 @@
     <TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
       <Protocol Name="OpenIdConnect" />
-	  <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
+      <!-- Add the output claims based on your needs. These are the claims that are expected to issue in the token, so take into account the claims provider must provide at least these as output claims. -->
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -27,14 +27,14 @@
         <OutputClaim ClaimTypeReferenceId="email" />
         <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="userPrincipalName" />
       </OutputClaims>
-	  <!-- In this case we are using SAML2, so there is no need the format of the SubjectNamingInfo claim be namespace/name. That is the case when using SAML1.1 (WS-Fed, for example).
-		   The SubjectNamingInfo in namespace/name should be something like: 
+      <!-- In this case we are using SAML2, so there is no need the format of the SubjectNamingInfo claim be namespace/name. That is the case when using SAML1.1 (WS-Fed, for example).
+      The SubjectNamingInfo in namespace/name should be something like: 
 		   
-		   <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
+      <SubjectNamingInfo ClaimType="userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false"/> 
 		   
-		   or 
+      or 
 		   
-		   <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
+      <SubjectNamingInfo ClaimType="http://schemas.microsoft.com/identity/claims/userPrincipalName" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:undefined" ExcludeAsClaim="true/false" />-->
       <SubjectNamingInfo ClaimType="userPrincipalName" />
     </TechnicalProfile>
   </RelyingParty>
