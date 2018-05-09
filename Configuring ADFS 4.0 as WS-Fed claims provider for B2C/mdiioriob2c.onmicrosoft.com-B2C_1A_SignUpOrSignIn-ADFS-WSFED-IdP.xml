@@ -4,7 +4,7 @@
     <PolicyId>B2C_1A_TrustFrameworkExtensions-ADFS-WSFED-IdP</PolicyId>
   </BasePolicy>
   <RelyingParty>
- 	<!-- The below is the user journey stored in the extensions policy -->
+    <!-- The below is the user journey stored in the extensions policy -->
     <DefaultUserJourney ReferenceId="SignUpOrSignInUsingmdiiorio" />
 	<UserJourneyBehaviors>
 		<!-- Possible values: Tenant, Application, Policy, or Disabled. This is explained in https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration. In this case
