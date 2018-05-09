@@ -4,14 +4,13 @@
     <PolicyId>B2C_1A_TrustFrameworkBase-ADFS-WSFED-IdP</PolicyId>
   </BasePolicy>
   <BuildingBlocks></BuildingBlocks>
-  <ClaimsProviders>
-  
-   <!-- The below claims provider was configured by following https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-custom-setup-adfs2016-idp and adapted based on https://github.com/Azure-Samples/active-directory-b2c-advanced-policies/blob/master/Documentation/Features%20part%206.md#specifying-a-technical-profile-for-a-ws-fed-claims-provider -->
-  <ClaimsProvider>
-    <Domain>marcelodiiorio.com</Domain>
-    <DisplayName>mdiiorio ADFS - WS-Fed</DisplayName>
-    <TechnicalProfiles>
-		<TechnicalProfile Id="mdiiorio-WSFED">
+  <ClaimsProviders>  
+  	<!-- The below claims provider was configured by following https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-custom-setup-adfs2016-idp and adapted based on https://github.com/Azure-Samples/active-directory-b2c-advanced-policies/blob/master/Documentation/Features%20part%206.md#specifying-a-technical-profile-for-a-ws-fed-claims-provider -->
+  	<ClaimsProvider>
+    		<Domain>marcelodiiorio.com</Domain>
+    		<DisplayName>mdiiorio ADFS - WS-Fed</DisplayName>
+    		<TechnicalProfiles>
+			<TechnicalProfile Id="mdiiorio-WSFED">
 			<DisplayName>mdiiorio ADFS - WS-Fed</DisplayName>
 			<Description>Login with your mdiiorio account</Description>
 			<Protocol Name="WsFed"/>
@@ -57,7 +56,7 @@
       </TechnicalProfiles>
     </ClaimsProvider>
 	
-	<!-- This is for local accounts. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started-custom -->
+    <!-- This is for local accounts. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started-custom -->
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
       <TechnicalProfiles>
@@ -74,8 +73,8 @@
       </TechnicalProfiles>
     </ClaimsProvider>
 	
-	<!-- This is for Azure AD (single-tenant) as IdP using custom policies. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-aad-custom. 
-	For multi-tenant scenario, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-commonaad-custom -->
+    <!-- This is for Azure AD (single-tenant) as IdP using custom policies. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-aad-custom. 
+    For multi-tenant scenario, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-commonaad-custom -->
     <ClaimsProvider>
       <Domain>mdiiorio</Domain>
       <DisplayName>Login using mdiiorio</DisplayName>
@@ -122,12 +121,12 @@
       <OrchestrationSteps>
         <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
           <ClaimsProviderSelections>
-			<!-- These elements make reference to elements in the orchestration step no. 2, except for LocalAccountSigninEmailExchange, which is in this same orchestration step. -->
+	    <!-- These elements make reference to elements in the orchestration step no. 2, except for LocalAccountSigninEmailExchange, which is in this same orchestration step. -->
             <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
             <ClaimsProviderSelection TargetClaimsExchangeId="mdiiorioExchange" />
-			<ClaimsProviderSelection TargetClaimsExchangeId="mdiiorioExchange2" />
-			<!-- The TechnicalProfileReferenceId mentioned below, makes reference to the technical profile that can be found in the base policy. -->
-			<ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+	    <ClaimsProviderSelection TargetClaimsExchangeId="mdiiorioExchange2" />
+	    <!-- The TechnicalProfileReferenceId mentioned below, makes reference to the technical profile that can be found in the base policy. -->
+	    <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
           </ClaimsProviderSelections>
           <ClaimsExchanges>
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
@@ -144,7 +143,7 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="FacebookExchange" TechnicalProfileReferenceId="Facebook-OAUTH" />
             <ClaimsExchange Id="mdiiorioExchange" TechnicalProfileReferenceId="mdiiorioProfile" />
-			<ClaimsExchange Id="mdiiorioExchange2" TechnicalProfileReferenceId="mdiiorio-WSFED" />
+	    <ClaimsExchange Id="mdiiorioExchange2" TechnicalProfileReferenceId="mdiiorio-WSFED" />
             <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
           </ClaimsExchanges>
         </OrchestrationStep>
@@ -203,8 +202,8 @@
             <ClaimsExchange Id="AADUserWrite" TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
           </ClaimsExchanges>
         </OrchestrationStep>
-		<!-- A JWT token is issued during the last orchestration step. This is normally expected, and we use to change this in cases like 
-		B2C as SAML or WS-Fed issuer, for example, where we expect to issue SAML2 or 1.1 tokens. -->
+	<!-- A JWT token is issued during the last orchestration step. This is normally expected, and we use to change this in cases like 
+	B2C as SAML or WS-Fed issuer, for example, where we expect to issue SAML2 or 1.1 tokens. -->
         <OrchestrationStep Order="7" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
       </OrchestrationSteps>
       <ClientDefinition ReferenceId="DefaultWeb" />
