@@ -5,6 +5,8 @@ Things to consider:
 https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-sso-custom
 https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration
 
+For token lifetime and session behavior references using custom policies, see https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-manage-sso-and-token-configuration#session-behavior-and-sso
+
 Basically:
 
 - Add all the technical profiles for session management described in the documents above, as well as the session behavior setting in the RP policies.
