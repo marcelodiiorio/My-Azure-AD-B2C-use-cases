@@ -2,11 +2,13 @@
 
 The policies involved are:
 
-	- ChangeSignInName.xml: This is the one that invokes the user journey to update the signInNames.userName element of the signInNames collection.
-	- SignUpOrSignIn.xml: To sign-up or sign-in.
-	- TrustFrameworkExtensions.xml: This one contains different claim providers and the changeUserName user journey.
-	- TrustFrameworBase.xml: This one contains the claims schema, where I have added the signInNames elements mentioned above, plus different technical profiles
-	  that are part of the flow.
+<b>ChangeSignInName.xml</b>: This is the one that invokes the user journey to update the signInNames.userName element of the signInNames collection.
+
+<b>SignUpOrSignIn.xml</b>: To sign-up or sign-in.
+
+<b>TrustFrameworkExtensions.xml</b>: This one contains different claim providers and the changeUserName user journey.
+
+<b>TrustFrameworBase.xml</b>: This one contains the claims schema, where I have added the signInNames elements mentioned above, plus different technical profiles that are part of the flow.
 
 For details, see the comments inside each policy. You have to change different references to point to your tenant, like:
 	- TenantId.
