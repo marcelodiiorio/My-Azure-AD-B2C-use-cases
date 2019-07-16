@@ -11,9 +11,9 @@ The policies involved are:
 <b>TrustFrameworBase.xml</b>: This one contains the claims schema, where I have added the signInNames elements mentioned above, plus different technical profiles that are part of the flow.
 
 For details, see the comments inside each policy. You have to change different references to point to your tenant, like:
-	- TenantId.
-	- PolicyId.
-	- Proxy and IEF app Ids.
+	<ul>TenantId.</ul>
+	<ul>PolicyId.</ul>
+	<ul>Proxy and IEF app Ids.</ul>
 
 This use case is based on the Azure AD B2C samples available in https://github.com/azure-ad-b2c/samples
 
