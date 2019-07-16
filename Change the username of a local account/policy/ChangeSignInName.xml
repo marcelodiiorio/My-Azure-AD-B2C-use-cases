@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Change TenantId, PolicyId and PublicPolicyUri to reflect your tenant. -->
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="YourTenant.onmicrosoft.com"
+  PolicyId="B2C_1A_ChangeSignInName"
+  PublicPolicyUri="http://YourTenant.onmicrosoft.com/B2C_1A_ChangeSignInName">
+
+  <BasePolicy>
+    <!-- Change the TenantId property to reflect your tenant name. -->
+    <TenantId>YourTenant.onmicrosoft.com</TenantId>
+    <!-- Change your base policy name for this policy, if needed. -->
+    <PolicyId>B2C_1A_ChangeSignInName_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+  
+  <!--Demo: This relaying party policy allows user to change the sign-in name (username)-->
+  <RelyingParty>
+    <!-- This is the default user journey that is invoked in the base policy (extensions). -->
+    <DefaultUserJourney ReferenceId="ChangeUserName" />
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
+
+

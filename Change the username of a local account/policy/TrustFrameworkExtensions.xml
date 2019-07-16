@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Change TenantId, PolicyId and PublicPolicyUri to reflect your tenant. -->
+<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="YourTenant.onmicrosoft.com" 
+  PolicyId="B2C_1A_ChangeSignInName_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://YourTenant.onmicrosoft.com/B2C_1A_ChangeSignInName_TrustFrameworkExtensionsQuiron">
+
+	<BasePolicy>
+    <!-- Change the TenantId property to reflect your tenant name. -->
+    <TenantId>YourTenant.onmicrosoft.com</TenantId>
+    <!-- Change your base policy name for this policy, if needed. -->
+    <PolicyId>B2C_1A_ChangeSignInName_TrustFrameworkBase</PolicyId>
+	</BasePolicy>
+	<BuildingBlocks>
+
+	</BuildingBlocks>
+
+	<ClaimsProviders>
+
+		<!-- Local account Sign-In claims provider -->
+		<ClaimsProvider>
+			<DisplayName>Local Account SignIn</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="login-NonInteractive">
+					<Metadata>
+						<Item Key="client_id">ProxyIdentityExperienceFrameworkAppId</Item>
+						<Item Key="IdTokenAudience">IdentityExperienceFrameworkAppId</Item>
+					</Metadata>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="client_id" DefaultValue="ProxyIdentityExperienceFrameworkAppId" />
+						<InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="IdentityExperienceFrameworkAppId" />
+					</InputClaims>
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+
+		<!-- Facebook claims provider -->
+		<ClaimsProvider>
+			<DisplayName>Facebook</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="Facebook-OAUTH">
+					<Metadata>
+            <!-- Add the client_id of your Facebook app registered in the B2C tenant. -->
+						<Item Key="client_id">facebook_clientid</Item>
+						<Item Key="scope">email public_profile</Item>
+						<Item Key="ClaimsEndpoint">https://graph.facebook.com/me?fields=id,first_name,last_name,name,email</Item>
+					</Metadata>
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>Azure Active Directory</DisplayName>
+			<TechnicalProfiles>
+				<!-- This technical profile write the new sign-in name to the user account in the directory. 
+        
+             We do the following: 
+             
+                - If a user tries to use the same username he is currently using, he can do the update, which ends in nothing being updated.
+                - If a user tries to use a username that is being used by another identity, then we throw an error. -->
+        
+				<TechnicalProfile Id="AAD-UserWriteEmailUsingObjectId">
+					<Metadata>
+						<Item Key="Operation">Write</Item>
+						<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+						<Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+					</Metadata>
+					<IncludeInSso>false</IncludeInSso>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+					</InputClaims>
+					<PersistedClaims>
+						<PersistedClaim ClaimTypeReferenceId="objectId" />
+						<!-- Just in case we have more than one element in the signInNames collection, we persist everything to avoid overwriting existing values. 
+                 We will write and persist the new userName in the identity. -->						
+            <PersistedClaim ClaimTypeReferenceId="userName" PartnerClaimType="signInNames.userName" />
+            <!-- We don't want to update the phone number and the email address in this use case, so we keep the existing values stored in the identity. -->
+            <PersistedClaim ClaimTypeReferenceId="signInNames.phoneNumber" PartnerClaimType="signInNames.phoneNumber" />
+            <PersistedClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="signInNames.emailAddress" />
+					</PersistedClaims>
+					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+
+		<ClaimsProvider>
+			<DisplayName>Self Asserted Social</DisplayName>
+			<TechnicalProfiles>
+				<!--This technical profile collects, validates and call AAD-UserWriteEmailUsingObjectId technical profile to persist the 
+					  data to Azure Active Directory account. -->
+				<TechnicalProfile Id="SelfAsserted-userNameUpdate">
+					<DisplayName>Email update</DisplayName>
+					<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+					<Metadata>
+						<Item Key="ContentDefinitionReferenceId">api.selfasserted.profileupdate</Item>
+					</Metadata>
+					<IncludeInSso>false</IncludeInSso>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="alternativeSecurityId" />
+						<InputClaim ClaimTypeReferenceId="userPrincipalName" />
+					</InputClaims>
+					<OutputClaims>
+						<!-- Demo: Collect and validate the email address -->
+						<OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+            <!-- We validate the email again, before proceeding with the userName update. We don't want to allow updating the userName without a previous 
+                 verification of the user that is trying to update such sensitive data. -->
+						<OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="Verified.Email" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="userName" PartnerClaimType="Verified.userName" Required="true" />
+					</OutputClaims>
+					<ValidationTechnicalProfiles>
+						<!-- call validation technical profile to persist the data. -->
+						<ValidationTechnicalProfile ReferenceId="AAD-UserWriteEmailUsingObjectId" />
+					</ValidationTechnicalProfiles>
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+
+	</ClaimsProviders>
+
+	<UserJourneys>
+		<UserJourney Id="ChangeUserName">
+			<OrchestrationSteps>
+				<!-- Demo: To change the sign-in names, user need to sign-in with 
+				local account only -->
+				<OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+					<ClaimsProviderSelections>
+						<ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+					</ClaimsProviderSelections>
+				</OrchestrationStep>
+
+				<!--Demo: Sign-in user with local account-->
+				<OrchestrationStep Order="2" Type="ClaimsExchange">
+					<ClaimsExchanges>
+						<ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+					</ClaimsExchanges>
+				</OrchestrationStep>
+
+				<!--Demo: Read the user data from the Azure Active Directory -->
+				<OrchestrationStep Order="3" Type="ClaimsExchange">
+					<Preconditions>
+						<Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+							<Value>authenticationSource</Value>
+							<Value>socialIdpAuthentication</Value>
+							<Action>SkipThisOrchestrationStep</Action>
+						</Precondition>
+					</Preconditions>
+					<ClaimsExchanges>
+						<ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+					</ClaimsExchanges>
+				</OrchestrationStep>
+
+				<!-- Demo: this self asserted technical profile validates and 
+					update the sing-in name -->
+				<OrchestrationStep Order="4" Type="ClaimsExchange">
+					<ClaimsExchanges>
+						<ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-userNameUpdate" />
+					</ClaimsExchanges>
+				</OrchestrationStep>
+
+				<OrchestrationStep Order="5" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+			</OrchestrationSteps>
+			<ClientDefinition ReferenceId="DefaultWeb" />
+		</UserJourney>
+
+	</UserJourneys>
+
+</TrustFrameworkPolicy>

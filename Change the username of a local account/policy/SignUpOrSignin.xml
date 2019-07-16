@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Change TenantId, PolicyId and PublicPolicyUri to reflect your tenant. -->
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="YourTenant.onmicrosoft.com"
+  PolicyId="B2C_1A_ChangeSignInName_signup_signin"
+  PublicPolicyUri="http://YourTenant.onmicrosoft.com/B2C_1A_ChangeSignInName_signup_signin">
+
+  <BasePolicy>
+    <!-- Change the TenantId property to reflect your tenant name. -->
+    <TenantId>YourTenant.onmicrosoft.com</TenantId>
+    <!-- Change your base policy name for this policy, if needed. -->
+    <PolicyId>B2C_1A_ChangeSignInName_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <RelyingParty>
+    <!-- This is the default user journey that is invoked in the base policy (extensions). -->
+    <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <!-- This is the set of claims we are outputting. Feel free to customize them. -->
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+        <OutputClaim ClaimTypeReferenceId="identityProvider" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
+
+
+
