@@ -15,7 +15,7 @@ For details, see the comments inside each policy. You have to change different r
 	<ul>PolicyId.</ul>
 	<ul>Proxy and IEF app Ids.</ul>
 
-This use case is based on the Azure AD B2C samples available in https://github.com/azure-ad-b2c/samples
+This use case is based on the Azure AD B2C samples available in https://github.com/azure-ad-b2c/samples.
 
 Basic flow:
 
@@ -25,9 +25,7 @@ Basic flow:
 4. Validate the email provided by entering a code and after that, change the username
 
 	<ul>If the username is already taken by another local account, an error is displayed.</ul>
-
 	<ul>If the username is the same the user is trying to use, no error is displayed.</ul>
-
 	<ul>If the username is different that the existing one and not in use, then it's updated.</ul>
 
 Credits to the AAD B2C GTP team for the samples I have used as source.
