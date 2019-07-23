@@ -7,7 +7,7 @@
   PolicySchemaVersion="0.3.0.0" 
   TenantId="YourTenant.onmicrosoft.com" 
   PolicyId="B2C_1A_ChangeSignInName_TrustFrameworkExtensions" 
-  PublicPolicyUri="http://YourTenant.onmicrosoft.com/B2C_1A_ChangeSignInName_TrustFrameworkExtensionsQuiron">
+  PublicPolicyUri="http://YourTenant.onmicrosoft.com/B2C_1A_ChangeSignInName_TrustFrameworkExtensions">
 
 	<BasePolicy>
     <!-- Change the TenantId property to reflect your tenant name. -->

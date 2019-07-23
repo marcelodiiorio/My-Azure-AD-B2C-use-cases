@@ -5,9 +5,9 @@
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
   PolicySchemaVersion="0.3.0.0"
-  TenantId="mdiioriob2c.onmicrosoft.com"
-  PolicyId="B2C_1A_ChangeSignInName_TrustFrameworkBaseQuiron"
-  PublicPolicyUri="http://mdiioriob2c.onmicrosoft.com/B2C_1A_ChangeSignInName_TrustFrameworkBase">
+  TenantId="YourTenant.onmicrosoft.com"
+  PolicyId="B2C_1A_ChangeSignInName_TrustFrameworkBase"
+  PublicPolicyUri="http://YourTenant.onmicrosoft.com/B2C_1A_ChangeSignInName_TrustFrameworkBase">
 
   <BuildingBlocks>
     <ClaimsSchema>
