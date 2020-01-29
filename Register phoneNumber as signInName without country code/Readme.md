@@ -1,4 +1,4 @@
-# Sample set of custom policies to store different values in the signInNames collection:
+# Sample set of custom policies to store different values in the signInNames collection
 
 In this use case we store the following values in the signInNames collection:
 
